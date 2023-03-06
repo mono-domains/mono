@@ -1,0 +1,20 @@
+<template>
+  <ul v-if="results" class="mt-4">
+    <DomainSearchResultsItem
+      v-for="(result) of results"
+      :key="result.domain + result.extension"
+      :result="result" />
+  </ul>
+</template>
+
+<script>
+export default {
+  name: 'DomainSearchResults',
+  props: {
+    results: {
+      type: Array,
+      default: null
+    }
+  }
+}
+</script>
