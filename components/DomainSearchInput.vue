@@ -2,8 +2,8 @@
   <div class="flex">
     <input
       type="text"
-      class="flex-1 border border-gray-600 rounded-l px-4 py-2 leading-none shadow-sm focus:outline-none"
-      placeholder="domainhackz"
+      class="flex-1 bg-neutral-50 text-2xl shadow-md shadow-neutral-200 transition-shadow duration-300 rounded px-5 py-4 leading-none focus:outline-none"
+      placeholder="mono.domains"
       @input="onInput" />
   </div>
 </template>

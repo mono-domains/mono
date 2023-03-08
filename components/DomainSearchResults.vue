@@ -2,7 +2,7 @@
   <ul v-if="results" class="mt-4">
     <DomainSearchResultsItem
       v-for="(result) of results"
-      :key="result.domain + result.extension"
+      :key="result.domain + result.extension.extension"
       :result="result" />
   </ul>
 </template>
