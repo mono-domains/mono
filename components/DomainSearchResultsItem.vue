@@ -1,6 +1,12 @@
 <template>
   <li class="py-2">
-    <button class="w-full text-left flex transition-opacity duration-300 text-2xl" :class="{ 'opacity-50': isDomainAvailable === false }">
+    <button
+      class="w-full text-left flex transition-opacity duration-300 text-2xl"
+      :class="{
+        'opacity-50': isDomainAvailable === false,
+        'cursor-progress': whoisSearchStatus === 'pending'
+      }"
+      @click="toggleIsExpanded">
       <div class="flex-1">
         <span v-if="result.subdomains" class="text-neutral-300">{{ result.subdomains }}</span>
         <span>{{ result.domain }}</span>
@@ -16,11 +22,12 @@
       </span>
     </button>
 
-    <div v-if="whoisSearchStatus !== 'pending'" class="py-4 ml-4">
+    <div v-if="whoisSearchStatus !== 'pending' && isExpanded" class="py-4 ml-4">
       <!-- Domain is taken -->
       <div v-if="isDomainAvailable === false">
         <p class="text-xl mb-4">this domain is taken 😔</p>
-        <pre class="max-w-3xl max-h-60 rounded bg-neutral-50 px-8 py-6 text-sm shadow-md shadow-neutral-200 overflow-auto whitespace-pre-line">{{ whoisInfo }}</pre>
+        <pre
+          class="max-w-3xl max-h-60 rounded bg-neutral-50 px-8 py-6 text-sm shadow-md shadow-neutral-200 overflow-auto whitespace-pre-line">{{ whoisInfo }}</pre>
       </div>
 
       <!-- Domain is available/unknown -->
@@ -50,6 +57,7 @@ export default {
   },
   data() {
     return {
+      isExpanded: false,
       whoisSearchStatus: 'pending',
       isDomainAvailable: null,
       whoisInfo: null
@@ -72,6 +80,13 @@ export default {
     this.setDomainAvailabilityInfo()
   },
   methods: {
+    toggleIsExpanded() {
+      if (this.whoisSearchStatus === 'pending') {
+        return
+      }
+
+      this.isExpanded = !this.isExpanded
+    },
     async setDomainAvailabilityInfo() {
       const domain = this.result.domain + this.result.extension.extension
 
@@ -88,6 +103,8 @@ export default {
         this.isDomainAvailable = isDomainAvailable,
         this.whoisInfo = whoisInfo.trim()
       } catch (e) {
+        this.whoisSearchStatus = 'error'
+
         alert(e)
       }
     }
