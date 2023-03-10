@@ -1,5 +1,5 @@
 <template>
-  <ul class="flex -mb-2">
+  <ul class="flex -mb-3">
     <RegistrarPricingItem
       v-for="(registrar, key) in registrars" :key="registrar + key"
       :registrar="registrar" />

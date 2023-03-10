@@ -32,8 +32,8 @@
 
       <!-- Domain is available/unknown -->
       <div v-else>
-        <p v-if="domainAvailability === '???'" class="text-xl mb-4">this domain might be available!</p>
-        <p v-else class="text-xl mb-4">this domain is available!</p>
+        <p v-if="domainAvailability === '???'" class="text-xl mb-4">this domain might be available! 🙏</p>
+        <p v-else class="text-xl mb-4">this domain is available! 🎉</p>
 
         <RegistrarPricing :registrars="result.extension.registrars" />
       </div>
