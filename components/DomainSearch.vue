@@ -24,7 +24,7 @@ export default {
     onSearchInput(input) {
       this.searchTerm = input
 
-      this.debounce(this.getSearchResults, 1000)
+      this.debounce(this.getSearchResults, 750)
     },
     async getSearchResults() {
       // Don't search for things less than 3 characters

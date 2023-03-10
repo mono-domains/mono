@@ -1,3 +1,8 @@
+const requestCache = {
+  search: {},
+  whois: {}
+}
+
 export const useMonoApi = () => {
   const runtimeConfig = useRuntimeConfig()
 
@@ -12,15 +17,33 @@ export const useMonoApi = () => {
   }
 
   const getSearchResultsFromApi = async (search) => {
-    const apiRequest = await makeApiCall(`/search/${search}`)
+    // Check the cache first
+    if (requestCache.search[search]) {
+      return requestCache.search[search]
+    }
 
-    return await apiRequest.json()
+    const apiRequest = await makeApiCall(`/search/${search}`)
+    const apiJson = await apiRequest.json()
+
+    // Cache the request
+    requestCache.search[search] = apiJson
+
+    return apiJson
   }
 
   const getWhoisResultFromApi = async (domain) => {
-    const apiRequest = await makeApiCall(`/availability/${domain}`)
+    // Check the cache first
+    if (requestCache.whois[domain]) {
+      return requestCache.whois[domain]
+    }
 
-    return await apiRequest.json()
+    const apiRequest = await makeApiCall(`/availability/${domain}`)
+    const apiJson = await apiRequest.json()
+
+    // Cache the request
+    requestCache.whois[domain] = apiJson
+
+    return apiJson
   }
 
   return {
