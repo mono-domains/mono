@@ -1,11 +1,15 @@
-import defaultTheme from 'tailwindcss/defaultTheme'
-
 export default {
   theme: {
+    fontFamily: {
+      sans: ['Geomanist', 'sans-serif']
+    },
     extend: {
-      colors: {
-        primary: defaultTheme.colors.green
-      }
+      fontSize: {
+        '10xl': '12rem'
+      },
+      letterSpacing: {
+        wide: '0.01em'
+      },
     }
   }
 }

@@ -2,8 +2,8 @@
   <div class="flex">
     <input
       type="text"
-      class="flex-1 bg-neutral-50 text-2xl shadow-md shadow-neutral-200 hover:shadow-lg focus:shadow-lg transition-shadow duration-300 rounded px-5 py-4 leading-none focus:outline-none"
-      placeholder="mono.domains"
+      class="flex-1 bg-neutral-50 text-2xl shadow-md shadow-neutral-200 hover:shadow-lg focus:shadow-lg transition-shadow duration-300 rounded px-5 py-4 tracking-wide leading-none focus:outline-none"
+      placeholder="e.g mono.domains"
       @input="onInput" />
   </div>
 </template>

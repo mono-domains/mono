@@ -1,13 +1,12 @@
 <template>
   <li class="py-2">
     <button
-      class="w-full text-left flex transition-opacity duration-300 text-2xl"
+      class="w-full text-left flex transition-opacity duration-300 text-2xl tracking-wide"
       :class="{
-        'opacity-50': isDomainAvailable === false,
-        'cursor-progress': whoisSearchStatus === 'pending'
+        'opacity-50': isDomainAvailable === false
       }"
       @click="toggleIsExpanded">
-      <div class="flex-1">
+      <div class="flex-1 font-semibold">
         <span v-if="result.subdomains" class="text-neutral-300">{{ result.subdomains }}</span>
         <span>{{ result.domain }}</span>
         <span class="text-neutral-700">{{ result.extension.extension }}</span>
@@ -22,21 +21,37 @@
       </span>
     </button>
 
-    <div v-if="whoisSearchStatus !== 'pending' && isExpanded" class="py-4 ml-4">
-      <!-- Domain is taken -->
-      <div v-if="isDomainAvailable === false">
-        <p class="text-xl mb-4">this domain is taken 😔</p>
-        <pre
-          class="max-w-3xl max-h-60 rounded bg-neutral-50 px-8 py-6 text-sm shadow-md shadow-neutral-200 overflow-auto whitespace-pre-line">{{ whoisInfo }}</pre>
+    <div v-if="isExpanded" class="py-4 ml-4">
+      <div class="mb-6">
+        <!-- Checking Whois -->
+        <template v-if="whoisSearchStatus === 'pending'">
+          <p class="text-xl tracking-wide">we're checking this domain's availability...</p>
+        </template>
+
+        <!-- Domain is taken -->
+        <template v-else-if="isDomainAvailable === false">
+          <p class="text-xl tracking-wide" :class="{ 'mb-4': isWhoisVisible }">
+            this domain is taken 😔
+            <a
+              href="#"
+              class="ml-2 text-sky-600"
+              @click.prevent="toggleIsWhoisVisible">
+              {{ isWhoisVisible ? 'hide' : 'show' }} whois
+            </a>
+          </p>
+          <pre
+            v-if="isWhoisVisible"
+            class="max-w-3xl max-h-60 mb-8 rounded bg-neutral-50 px-8 py-6 text-sm shadow-md shadow-neutral-200 overflow-auto whitespace-pre-line">{{ whoisInfo }}</pre>
+        </template>
+
+        <!-- Domain is available/unknown -->
+        <template v-else>
+          <p v-if="domainAvailability === '???'" class="text-xl tracking-wide mb-4">this domain might be available! 🙏</p>
+          <p v-else class="text-xl tracking-wide">this domain is available! 🎉</p>
+        </template>
       </div>
 
-      <!-- Domain is available/unknown -->
-      <div v-else>
-        <p v-if="domainAvailability === '???'" class="text-xl mb-4">this domain might be available! 🙏</p>
-        <p v-else class="text-xl mb-4">this domain is available! 🎉</p>
-
-        <RegistrarPricing :registrars="result.extension.registrars" />
-      </div>
+      <RegistrarPricing :registrars="result.extension.registrars" />
     </div>
   </li>
 </template>
@@ -60,7 +75,8 @@ export default {
       isExpanded: false,
       whoisSearchStatus: 'pending',
       isDomainAvailable: null,
-      whoisInfo: null
+      whoisInfo: null,
+      isWhoisVisible: false
     }
   },
   computed: {
@@ -80,13 +96,6 @@ export default {
     this.setDomainAvailabilityInfo()
   },
   methods: {
-    toggleIsExpanded() {
-      if (this.whoisSearchStatus === 'pending') {
-        return
-      }
-
-      this.isExpanded = !this.isExpanded
-    },
     async setDomainAvailabilityInfo() {
       const domain = this.result.domain + this.result.extension.extension
 
@@ -107,6 +116,12 @@ export default {
 
         alert(e)
       }
+    },
+    toggleIsExpanded() {
+      this.isExpanded = !this.isExpanded
+    },
+    toggleIsWhoisVisible() {
+      this.isWhoisVisible = !this.isWhoisVisible
     }
   }
 }
