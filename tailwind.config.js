@@ -1,7 +1,8 @@
 export default {
   theme: {
     fontFamily: {
-      sans: ['Geomanist', 'sans-serif']
+      sans: ['Geomanist', 'sans-serif'],
+      serif: ['Calendas Plus', 'serif']
     },
     extend: {
       fontSize: {
@@ -9,7 +10,7 @@ export default {
       },
       letterSpacing: {
         wide: '0.01em'
-      },
+      }
     }
   }
 }

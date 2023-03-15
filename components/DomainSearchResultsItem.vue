@@ -6,11 +6,11 @@
         'opacity-50': isDomainAvailable === false
       }"
       @click="toggleIsExpanded">
-      <div class="flex-1 font-semibold">
+      <h2 class="flex-1 font-semibold tracking-wide">
         <span v-if="result.subdomains" class="text-neutral-300">{{ result.subdomains }}</span>
         <span>{{ result.domain }}</span>
         <span class="text-neutral-700">{{ result.extension.extension }}</span>
-      </div>
+      </h2>
       
       <span :class="{
         'text-amber-500': domainAvailability === '???',
@@ -22,7 +22,7 @@
     </button>
 
     <div v-if="isExpanded" class="py-4 ml-4">
-      <div class="mb-6">
+      <div class="mb-8">
         <!-- Checking Whois -->
         <template v-if="whoisSearchStatus === 'pending'">
           <p class="text-xl tracking-wide">we're checking this domain's availability...</p>
@@ -51,7 +51,7 @@
         </template>
       </div>
 
-      <RegistrarPricing :registrars="result.extension.registrars" />
+      <RegistrarPricing v-if="isDomainAvailable !== false" :registrars="result.extension.registrars" />
     </div>
   </li>
 </template>
