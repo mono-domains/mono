@@ -21,7 +21,7 @@
       </span>
     </button>
 
-    <div v-if="isExpanded" class="py-4 ml-4">
+    <div v-if="isExpanded" class="pt-4 ml-4 mb-8">
       <div class="mb-8">
         <!-- Checking Whois -->
         <template v-if="whoisSearchStatus === 'pending'">
@@ -30,17 +30,16 @@
 
         <!-- Domain is taken -->
         <template v-else-if="isDomainAvailable === false">
-          <p class="text-xl tracking-wide" :class="{ 'mb-4': isWhoisVisible }">
+          <p class="text-xl tracking-wide mb-4">
             this domain is taken 😔
-            <a
+            <!-- <a
               href="#"
               class="ml-2 text-sky-600"
               @click.prevent="toggleIsWhoisVisible">
               {{ isWhoisVisible ? 'hide' : 'show' }} whois
-            </a>
+            </a> -->
           </p>
           <pre
-            v-if="isWhoisVisible"
             class="max-w-3xl max-h-60 mb-8 rounded bg-neutral-50 px-8 py-6 text-sm shadow-md shadow-neutral-200 overflow-auto whitespace-pre-line">{{ whoisInfo }}</pre>
         </template>
 
@@ -57,6 +56,8 @@
 </template>
 
 <script>
+import punycode from 'punycode'
+
 export default {
   name: 'DomainSearchResultsItem',
   setup() {
@@ -98,9 +99,10 @@ export default {
   methods: {
     async setDomainAvailabilityInfo() {
       const domain = this.result.domain + this.result.extension.extension
+      const punycodedDomain = punycode.toASCII(domain)
 
       try {
-        const { success, isDomainAvailable, whoisInfo, error } = await this.getWhoisResultFromApi(domain)
+        const { success, isDomainAvailable, whoisInfo, error } = await this.getWhoisResultFromApi(punycodedDomain)
 
         if (!success) {
           this.whoisSearchStatus = 'error'

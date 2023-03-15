@@ -9,7 +9,8 @@
 
     <div
       v-if="registrar.isOnSale"
-      class="absolute top-0 right-0 flex justify-center items-center leading-3 w-5 h-5 bg-red-500 font-semibold text-xs text-white rounded-full translate-x-1/3 -translate-y-1/3 -rotate-6">
+      class="absolute top-0 right-0 flex justify-center items-center leading-3 w-5 h-5 bg-red-500 font-semibold text-xs text-white rounded-full translate-x-1/3 -translate-y-1/3 -rotate-6"
+      :class="{ 'w-6 h-6 text-sm': isLarge }">
       $
     </div>
   </li>

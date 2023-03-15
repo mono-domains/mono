@@ -3,13 +3,14 @@
     <h3 class="w-full font-semibold tracking-wide text-2xl mb-4">cheapest registrar</h3>
     <RegistrarPricingItem
       :isLarge="true"
-      :registrar="cheapestRegistrar"
-      class="mb-8" />
+      :registrar="cheapestRegistrar" />
 
-    <h3 class="w-full font-semibold tracking-wide text-xl mb-4">other registrars</h3>
-    <RegistrarPricingItem
-      v-for="(registrar, key) in otherRegistrars" :key="registrar + key"
-      :registrar="registrar" />
+    <template v-if="otherRegistrars.length">
+      <h3 class="w-full font-semibold tracking-wide text-xl mt-8 mb-4">other registrars</h3>
+      <RegistrarPricingItem
+        v-for="(registrar, key) in otherRegistrars" :key="registrar + key"
+        :registrar="registrar" />
+    </template>
   </ul>
 </template>
 

@@ -1,9 +1,10 @@
 <template>
   <DomainSearchInput @onInput="onSearchInput" />
-  <DomainSearchResults :results="searchResults.results" />
+  <DomainSearchResults :results="searchResults" />
 </template>
 
 <script>
+import punycode from 'punycode'
 import { debounce } from '~/mixins/debounce'
 
 export default {
@@ -17,7 +18,7 @@ export default {
   data() {
     return {
       searchTerm: '',
-      searchResults: {}
+      searchResults: []
     }
   },
   methods: {
@@ -27,13 +28,21 @@ export default {
       this.debounce(this.getSearchResults, 750)
     },
     async getSearchResults() {
-      // Don't search for things less than 3 characters
-      if (this.searchTerm.length < 3) {
-        return
-      }
+      const searchTerm = punycode.toASCII(this.searchTerm)
 
       try {
-        this.searchResults = await this.getSearchResultsFromApi(this.searchTerm)
+        const searchResponse = await this.getSearchResultsFromApi(searchTerm)
+        const searchResults = JSON.parse(JSON.stringify(searchResponse.results))
+
+        const formattedSearchResults = searchResults.map((result) => {
+          return {
+            extension: result.extension,
+            domain: punycode.toUnicode(result.domain),
+            subdomains: result.subdomains
+          }
+        })
+
+        this.searchResults = formattedSearchResults
       } catch (e) {
         // Error reporting, improve this later
         alert(e.message)
