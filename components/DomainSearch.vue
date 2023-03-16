@@ -28,6 +28,10 @@ export default {
       this.debounce(this.getSearchResults, 750)
     },
     async getSearchResults() {
+      if (this.searchTerm === '') {
+        return
+      }
+
       const searchTerm = punycode.toASCII(this.searchTerm)
 
       try {

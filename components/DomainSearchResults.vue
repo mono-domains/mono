@@ -1,5 +1,5 @@
 <template>
-  <ul v-if="results" class="mt-8">
+  <ul v-if="results" class="mt-8" v-auto-animate>
     <DomainSearchResultsItem
       v-for="(result) of results"
       :key="result.domain + result.extension.extension"

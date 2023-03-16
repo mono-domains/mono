@@ -1,5 +1,5 @@
 <template>
-  <li class="py-2">
+  <li class="py-2" v-auto-animate>
     <button
       class="w-full text-left flex transition-opacity duration-300 text-2xl tracking-wide"
       :class="{
@@ -21,7 +21,7 @@
       </span>
     </button>
 
-    <div v-if="isExpanded" class="pt-4 ml-4 mb-8">
+    <div v-if="isExpanded" class="mt-6 mb-8 pl-4" v-auto-animate>
       <div class="mb-8">
         <!-- Checking Whois -->
         <template v-if="whoisSearchStatus === 'pending'">
