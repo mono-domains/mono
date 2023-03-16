@@ -30,23 +30,22 @@
 
         <!-- Domain is taken -->
         <template v-else-if="isDomainAvailable === false">
-          <p class="text-xl tracking-wide mb-4">
-            this domain is taken 😔
-            <!-- <a
-              href="#"
-              class="ml-2 text-sky-600"
-              @click.prevent="toggleIsWhoisVisible">
-              {{ isWhoisVisible ? 'hide' : 'show' }} whois
-            </a> -->
-          </p>
+          <p class="text-5xl font-semibold mb-3">sorry! 😔</p>
+          <p class="text-xl tracking-wide mb-8">{{ domain }} is taken</p>
           <pre
             class="max-w-3xl max-h-60 mb-8 rounded bg-neutral-50 px-8 py-6 text-sm shadow-md shadow-neutral-200 overflow-auto whitespace-pre-line">{{ whoisInfo }}</pre>
         </template>
 
-        <!-- Domain is available/unknown -->
+        <!-- Domain is unknown -->
+        <template v-else-if="domainAvailability === '???'">
+          <p class="text-5xl font-semibold mb-3">hmm.. 🤔</p>
+          <p class="text-xl tracking-wide">{{ domain }} might be available</p>
+        </template>
+
+        <!-- Domain is available -->
         <template v-else>
-          <p v-if="domainAvailability === '???'" class="text-xl tracking-wide mb-4">this domain might be available! 🙏</p>
-          <p v-else class="text-xl tracking-wide">this domain is available! 🎉</p>
+          <p class="text-5xl font-semibold mb-3">yay! 🎉</p>
+          <p class="text-xl tracking-wide">{{ domain }} is available!</p>
         </template>
       </div>
 
@@ -81,6 +80,9 @@ export default {
     }
   },
   computed: {
+    domain() {
+      return this.result.domain + this.result.extension.extension
+    },
     domainAvailability() {
       if (this.whoisSearchStatus === 'pending') {
         return '...'
@@ -98,8 +100,7 @@ export default {
   },
   methods: {
     async setDomainAvailabilityInfo() {
-      const domain = this.result.domain + this.result.extension.extension
-      const punycodedDomain = punycode.toASCII(domain)
+      const punycodedDomain = punycode.toASCII(this.domain)
 
       try {
         const { success, isDomainAvailable, whoisInfo, error } = await this.getWhoisResultFromApi(punycodedDomain)

@@ -21,6 +21,16 @@ export default {
       searchResults: []
     }
   },
+  computed: {
+    sanitizedSearchTerm() {
+      let searchTerm = this.searchTerm.toLowerCase()
+
+      searchTerm = searchTerm.replace(/^[a-z]*(?:\:\/\/)/, '')
+      searchTerm = searchTerm.replace(/[^a-zA-Z0-9\-.]/g, '')
+
+      return searchTerm
+    }
+  },
   methods: {
     onSearchInput(input) {
       this.searchTerm = input
@@ -28,15 +38,15 @@ export default {
       this.debounce(this.getSearchResults, 750)
     },
     async getSearchResults() {
-      if (this.searchTerm === '') {
+      if (this.sanitizedSearchTerm === '') {
         return
       }
 
-      const searchTerm = punycode.toASCII(this.searchTerm)
+      const searchTerm = punycode.toASCII(this.sanitizedSearchTerm)
 
       try {
         const searchResponse = await this.getSearchResultsFromApi(searchTerm)
-        const searchResults = JSON.parse(JSON.stringify(searchResponse.results))
+        const searchResults = searchResponse.results
 
         const formattedSearchResults = searchResults.map((result) => {
           return {

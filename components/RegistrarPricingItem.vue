@@ -1,6 +1,6 @@
 <template>
   <li
-    class="relative mr-3 mb-3 rounded rounded bg-neutral-50 shadow-md shadow-neutral-200 hover:shadow-lg hover:-translate-y-1 transition-all transition-shadow duration-300 leading-normal text-center"
+    class="relative mr-3 mb-3 rounded rounded bg-neutral-50 shadow-md shadow-neutral-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 leading-normal text-center"
     :class="sizeClasses">
     <a :href="registrar.registerUrl" class="block" :class="isLarge ? 'py-1.5' : 'py-1'" target="_blank" rel="noopener">
       <p class="font-semibold tracking-wide">{{ registrar.name }}</p>
@@ -11,7 +11,7 @@
       v-if="registrar.isOnSale"
       class="absolute top-0 right-0 flex justify-center items-center leading-3 bg-red-500 font-semibold text-white rounded-full translate-x-1/3 -translate-y-1/3 -rotate-6"
       :class="saleRibbonSizeClasses">
-      $
+      %
     </div>
   </li>
 </template>
