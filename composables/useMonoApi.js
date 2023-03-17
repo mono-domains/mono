@@ -1,6 +1,7 @@
 const requestCache = {
   search: {},
-  whois: {}
+  whois: {},
+  extension: {}
 }
 
 export const useMonoApi = () => {
@@ -46,8 +47,24 @@ export const useMonoApi = () => {
     return apiJson
   }
 
+  const getExtensionPricingResultFromApi = async (extension) => {
+    // Check the cache first
+    if (requestCache.extension[extension]) {
+      return requestCache.extension[extension]
+    }
+
+    const apiRequest = await makeApiCall(`/extension/${extension}`)
+    const apiJson = await apiRequest.json()
+
+    // Cache the request
+    requestCache.extension[extension] = apiJson
+
+    return apiJson
+  }
+
   return {
     getSearchResultsFromApi,
-    getWhoisResultFromApi
+    getWhoisResultFromApi,
+    getExtensionPricingResultFromApi
   }
 }

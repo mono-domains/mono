@@ -35,6 +35,13 @@ export default {
     onSearchInput(input) {
       this.searchTerm = input
 
+      // If the user clears the search box, remove any results
+      if (this.searchTerm === '') {
+        this.searchResults = []
+        return
+      }
+
+      // Otherwise, get the results for the user's search terms
       this.debounce(this.getSearchResults, 750)
     },
     async getSearchResults() {
