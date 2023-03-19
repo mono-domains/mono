@@ -62,9 +62,18 @@ export const useMonoApi = () => {
     return apiJson
   }
 
+  const getHomepageStatsFromApi = async () => {
+    // This _should_ only be called during build, so no need to cache it
+    const apiRequest = await makeApiCall(`/homepageStats`)
+    const apiJson = await apiRequest.json()
+
+    return apiJson
+  }
+
   return {
     getSearchResultsFromApi,
     getWhoisResultFromApi,
-    getExtensionPricingResultFromApi
+    getExtensionPricingResultFromApi,
+    getHomepageStatsFromApi
   }
 }
