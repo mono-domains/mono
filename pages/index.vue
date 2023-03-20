@@ -3,5 +3,9 @@
     <HeroSearch />
 
     <WhatIsMono />
+
+    <ExtensionsStats />
   </div>
+
+  <PageFooter />
 </template>

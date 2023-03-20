@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-32">
+  <div class="mb-44">
     <h2 class="text-4xl font-bold tracking-wide mb-6">what is mono?</h2>
     <div class="mb-20">
       <p class="text-xl leading-relaxed mb-2">mono is <em>the</em> domain name search engine for developers, entrepreneurs and domain name enthusiasts!</p>
@@ -20,10 +20,10 @@
         </p>
 
         <ul class="flex">
-          <RegistrarPricingItem
+          <ItemPricing
             v-for="(registrar) of comRegistrars"
             :key="registrar.name"
-            :registrar="registrar"
+            :pricing="registrar"
             class="pointer-events-none" />
         </ul>
 
@@ -31,7 +31,7 @@
       </div>
     </div>
 
-    <div class="flex items-center mb-44">
+    <div class="flex items-center">
       <div class="relative w-96 ml-10 overflow-hidden">
         <div class="bg-neutral-50 text-2xl shadow-md shadow-neutral-200 rounded px-5 py-4 tracking-wide leading-none mb-6">
           cheap cars
@@ -61,17 +61,6 @@
         </p>
       </div>
     </div>
-
-    <div>
-      <h2 class="text-4xl text-center tracking-wide font-bold mb-6">from {{ firstAndLastTLD[0] }} to {{ firstAndLastTLD[1] }}</h2>
-      <p class="text-xl text-center leading-relaxed">
-        mono stores prices for
-        <span class="font-semibold">{{ formatNumber(extensionsCount) }}</span>
-        different extensions from
-        <span class="font-semibold">{{ registrarsCount }}</span>
-        different registrars!
-      </p>
-    </div>
   </div>
 </template>
 
@@ -83,23 +72,12 @@ export default {
 
     const {
       comRegistrars,
-      domainHacks,
-      firstAndLastTLD,
-      extensionsCount,
-      registrarsCount
+      domainHacks
     } = await getHomepageStatsFromApi()
 
     return {
       comRegistrars,
-      domainHacks,
-      firstAndLastTLD,
-      extensionsCount,
-      registrarsCount
-    }
-  },
-  methods: {
-    formatNumber(number) {
-      return new Intl.NumberFormat('en-US').format(Number(number))
+      domainHacks
     }
   }
 }

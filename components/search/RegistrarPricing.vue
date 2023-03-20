@@ -1,15 +1,15 @@
 <template>
   <ul class="flex flex-wrap -mb-3">
     <h3 class="w-full font-semibold tracking-wide text-2xl mb-4">cheapest registration</h3>
-    <RegistrarPricingItem
+    <ItemPricing
       :isLarge="true"
-      :registrar="cheapestRegistrar" />
+      :pricing="cheapestRegistrar" />
 
     <template v-if="otherRegistrars.length">
       <h3 class="w-full font-semibold tracking-wide text-xl mt-5 mb-4">other registrars</h3>
-      <RegistrarPricingItem
+      <ItemPricing
         v-for="(registrar, key) in otherRegistrars" :key="registrar + key"
-        :registrar="registrar" />
+        :pricing="registrar" />
     </template>
   </ul>
 </template>
