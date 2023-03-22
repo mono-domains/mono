@@ -25,6 +25,7 @@
       <div class="mb-8">
         <!-- Checking Whois -->
         <template v-if="whoisSearchStatus === 'pending'">
+          <p class="text-5xl font-semibold mb-3">one sec..</p>
           <p class="text-xl tracking-wide">we're checking this domain's availability...</p>
         </template>
 

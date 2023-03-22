@@ -1,12 +1,12 @@
 <template>
   <div class="mb-44">
     <h2 class="text-4xl font-bold tracking-wide mb-6">what is mono?</h2>
-    <div class="mb-20">
+    <div class="mb-28">
       <p class="text-xl leading-relaxed mb-2">mono is <em>the</em> domain name search engine for developers, entrepreneurs and domain name enthusiasts!</p>
       <p class="text-xl leading-relaxed">with mono, you can get real time information on domain availability, pricing and more in seconds!</p>
     </div>
 
-    <div class="flex items-center mb-24">
+    <div class="flex items-center mb-28">
       <div class="flex-1 mr-16">
         <h2 class="text-3xl font-bold tracking-wide mb-6">price comparisons</h2>
         <p class="text-xl leading-relaxed mb-4">mono fetches pricing data from several reputable registrars to make sure you're getting the best price!</p>
@@ -33,8 +33,19 @@
 
     <div class="flex items-center">
       <div class="relative w-96 ml-10 overflow-hidden">
-        <div class="bg-neutral-50 text-2xl shadow-md shadow-neutral-200 rounded px-5 py-4 tracking-wide leading-none mb-6">
-          cheap cars
+        <div class="relative">
+          <div class="bg-neutral-50 text-2xl shadow-md shadow-neutral-200 rounded pl-14 py-4 tracking-wide leading-none mb-6">
+            cheap cars
+          </div>
+
+          <div class="absolute top-0 left-0 w-14 h-full pt-0.5 pl-0.5 flex justify-center" @click="emitEvent(input)">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              class="w-6">
+              <path d="m23.809 21.646-6.205-6.205a9.68 9.68 0 0 0 1.857-5.711C19.461 4.365 15.096 0 9.73 0 4.365 0 0 4.365 0 9.73c0 5.366 4.365 9.73 9.73 9.73a9.678 9.678 0 0 0 5.487-1.698L21.455 24l2.354-2.354zM2.854 9.73c0-3.792 3.085-6.877 6.877-6.877s6.877 3.085 6.877 6.877-3.085 6.877-6.877 6.877A6.884 6.884 0 0 1 2.854 9.73z"/>
+            </svg>
+          </div>
         </div>
 
         <ul>
@@ -55,9 +66,9 @@
         <h2 class="text-3xl font-bold tracking-wide mb-6">domain hacks</h2>
         <p class="text-xl leading-relaxed mb-4">mono automatically detects and includes domain hacks in your search results to help you find shorter (and cooler) domains.</p>
         <p class="text-xl leading-relaxed">
-          <a href="https://en.wikipedia.org/wiki/Domain_hack" target="_blank" class="text-sky-600">
+          <BaseLink to="https://en.wikipedia.org/wiki/Domain_hack">
             read more about domain hacks
-          </a>
+          </BaseLink>
         </p>
       </div>
     </div>

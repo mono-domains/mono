@@ -62,8 +62,14 @@ export const useMonoApi = () => {
     return apiJson
   }
 
+  const getAllExtensionsFromApi = async () => {
+    const apiRequest = await makeApiCall(`/extension/all`)
+    const apiJson = await apiRequest.json()
+
+    return apiJson
+  }
+
   const getHomepageStatsFromApi = async () => {
-    // This _should_ only be called during build, so no need to cache it
     const apiRequest = await makeApiCall(`/homepageStats`)
     const apiJson = await apiRequest.json()
 
@@ -74,6 +80,7 @@ export const useMonoApi = () => {
     getSearchResultsFromApi,
     getWhoisResultFromApi,
     getExtensionPricingResultFromApi,
+    getAllExtensionsFromApi,
     getHomepageStatsFromApi
   }
 }

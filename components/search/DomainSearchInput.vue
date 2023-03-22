@@ -7,7 +7,7 @@
       placeholder="e.g. mono domains"
       @input="emitEvent(input)" />
 
-    <button class="absolute top-0 left-0 w-14 h-full pt-0.5 pl-0.5 flex justify-center" @click="emitEvent(input)">
+    <button class="absolute top-0 left-0 w-14 h-full pt-0.5 pl-0.5 flex items-center justify-center" @click="emitEvent(input)">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"

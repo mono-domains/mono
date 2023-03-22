@@ -19,7 +19,7 @@
         class="mr-4 mb-6" />
     </ul>
     <p class="w-full text-l text-center leading-relaxed">
-      <NuxtLink to="/extensions" class="text-sky-600">view all extensions</NuxtLink>
+      <BaseLink to="/extensions">view all extensions</BaseLink>
     </p>
   </div>
 </template>

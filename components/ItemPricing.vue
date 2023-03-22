@@ -1,13 +1,18 @@
 <template>
   <li
-    class="relative mr-3 mb-3 rounded rounded bg-neutral-50 shadow-md shadow-neutral-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 leading-normal text-center"
+    class="relative flex items-center mr-3 mb-3 rounded rounded bg-neutral-50 shadow-md shadow-neutral-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 leading-normal text-center"
     :class="sizeClasses">
-    <NuxtLink v-if="isExtension" :to="`/extensions/${pricing.name}`" class="block" :class="isLarge ? 'py-1.5' : 'py-1'">
+    <NuxtLink
+      v-if="isExtension"
+      :to="`/extensions/${pricing.name}`"
+      class="block w-full"
+      :class="isLarge ? 'py-1.5' : 'py-1'"
+      :noPrefetch="prefetch === false ? true : null">
       <p class="font-semibold tracking-wide">{{ decodedName }}</p>
       <p class="tracking-wide">{{ isExtension ? 'from ' : '' }}${{ formatNumber(pricing.registerPrice) }}</p>
     </NuxtLink>
 
-    <a v-else :href="pricing.registerUrl" class="block" :class="isLarge ? 'py-1.5' : 'py-1'" target="_blank" rel="noopener">
+    <a v-else :href="pricing.registerUrl" class="block w-full" :class="isLarge ? 'py-1.5' : 'py-1'" target="_blank" rel="noopener">
       <p class="font-semibold tracking-wide">{{ pricing.name }}</p>
       <p class="tracking-wide">${{ formatNumber(pricing.registerPrice) }}</p>
     </a>
@@ -38,6 +43,10 @@ export default {
     isLarge: {
       type: Boolean,
       default: false
+    },
+    prefetch: {
+      type: Boolean,
+      default: true
     }
   },
   computed: {
