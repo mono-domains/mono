@@ -14,8 +14,11 @@
 </template>
 
 <script>
+import { helpers } from '../../mixins/helpers'
+
 export default {
   name: 'ExtensionsPage',
+  mixins: [helpers],
   async setup() {
     const { getAllExtensionsFromApi } = useMonoApi()
 
@@ -46,11 +49,6 @@ export default {
     return {
       extensions,
       extensionsCount: allExtensions.results.length
-    }
-  },
-  methods: {
-    formatNumber(value, maximumFractionDigits = 2) {
-      return parseFloat(value).toLocaleString(undefined, { maximumFractionDigits })
     }
   }
 }

@@ -25,8 +25,11 @@
 </template>
 
 <script>
+import { helpers } from '../../mixins/helpers'
+
 export default {
   name: 'ExtensionsStats',
+  mixins: [helpers],
   async setup() {
     const { getHomepageStatsFromApi } = useMonoApi()
 
@@ -42,11 +45,6 @@ export default {
       extensionsCount,
       registrarsCount,
       cheapestExtensions
-    }
-  },
-  methods: {
-    formatNumber(value, maximumFractionDigits = 2) {
-      return parseFloat(value).toLocaleString(undefined, { maximumFractionDigits })
     }
   }
 }

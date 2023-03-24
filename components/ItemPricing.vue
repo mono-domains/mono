@@ -29,8 +29,11 @@
 <script>
 import punycode from 'punycode'
 
+import { helpers } from '../mixins/helpers'
+
 export default {
   name: 'ItemPricing',
+  mixins: [helpers],
   props: {
     pricing: {
       type: Object,
@@ -66,11 +69,6 @@ export default {
     },
     decodedName() {
       return punycode.toUnicode(this.pricing.name)
-    }
-  },
-  methods: {
-    formatNumber(value, minimumFractionDigits = 2, maximumFractionDigits = 2) {
-      return parseFloat(value).toLocaleString(undefined, { minimumFractionDigits, maximumFractionDigits }).replace('.00', '')
     }
   }
 }
