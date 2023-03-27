@@ -1,4 +1,6 @@
 <template>
+  <PageHeader />
+
   <div class="w-full max-w-5xl mx-auto px-6 py-44">
     <h1 class="text-8xl font-bold leading-none -ml-0.5 mb-4">{{ extension }}</h1>
     <p class="text-xl leading-relaxed mb-12">
@@ -10,6 +12,10 @@
     </p>
 
     <RegistrarPricing :registrars="registrars" />
+
+    <p class="text-xl text-center mt-24">
+      <BaseLink to="/extensions">back to extensions list</BaseLink>
+    </p>
   </div>
 
   <PageFooter />
