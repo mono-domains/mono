@@ -1,7 +1,7 @@
 <template>
-  <footer>
-    <p class="text-l text-center mb-2 space-x-4">
-      <span>&copy; mono.domains</span>
+  <footer class="px-4 sm:px-6">
+    <p class="w-full text-l text-center mb-2 space-x-4">
+      <span class="block sm:inline w-full sm:w-auto">&copy; mono.domains</span>
       <span>
         <BaseLink to="https://www.josh.ee">
           made by josh

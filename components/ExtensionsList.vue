@@ -1,19 +1,21 @@
 <template>
   <div>
-    <p class="text-xl leading-relaxed mb-12">
+    <p class="text-l sm:text-xl leading-relaxed mb-12">
       jump to:
-      <span class="ml-1 space-x-1.5">
-        <BaseLink
+      <span class="ml-1 space-x-1 sm:space-x-1.5">
+        <a
           v-for="(section, i) of sections"
           :key="section + i"
+          :href="`#${section}`"
+          class="text-sky-600"
           @click.prevent="jumpToSection(section)">
           {{ section }}
-        </BaseLink>
+        </a>
       </span>
     </p>
 
     <div v-for="(section, i) of sections" :key="section + i">
-      <h2 :id="section" class="text-3xl font-bold tracking-wide mb-6">
+      <h2 :id="section" class="text-2xl sm:text-3xl font-bold tracking-wide mb-6">
         {{ section }}
       </h2>
 

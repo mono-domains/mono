@@ -55,14 +55,14 @@ export default {
   computed: {
     sizeClasses() {
       if (this.isLarge) {
-        return 'w-32 text-base'
+        return 'w-28 sm:w-32 text-sm sm:text-base'
       }
 
       return 'w-28 text-sm'
     },
     saleRibbonSizeClasses() {
       if (this.isLarge) {
-        return 'w-6 h-6 text-sm'
+        return 'w-5.25 sm:w-6 h-5.25 sm:h-6 text-xs sm:text-sm'
       }
 
       return 'w-5.25 h-5.25 text-xs'

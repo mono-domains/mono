@@ -1,14 +1,14 @@
 <template>
   <li class="py-2" v-auto-animate>
     <button
-      class="w-full text-left flex transition-opacity duration-300 text-2xl tracking-wide"
+      class="w-full text-left flex transition-opacity duration-300 text-xl sm:text-2xl tracking-wide"
       :class="{
         'opacity-50': isDomainAvailable === false
       }"
       @click="toggleIsExpanded">
       <h2 class="flex-1 font-semibold tracking-wide">
         <span v-if="result.subdomains" class="text-neutral-300">{{ result.subdomains }}</span>
-        <span>{{ result.domain }}</span>
+        <span class="break-all">{{ result.domain }}</span>
         <span class="text-neutral-700">{{ result.extension.extension }}</span>
       </h2>
       
@@ -21,32 +21,33 @@
       </span>
     </button>
 
-    <div v-if="isExpanded" class="mt-6 mb-8 pl-4" v-auto-animate>
-      <div class="mb-8">
+    <div v-if="isExpanded" class="mt-6 mb-8 sm:pl-4" v-auto-animate>
+      <div class=" mb-6 sm:mb-8">
         <!-- Checking Whois -->
         <template v-if="whoisSearchStatus === 'pending'">
-          <p class="text-5xl font-semibold mb-3">one sec..</p>
-          <p class="text-xl tracking-wide">we're checking this domain's availability...</p>
+          <p class="text-4xl sm:text-5xl font-semibold mb-3">one sec..</p>
+          <p class="text-l sm:text-xl tracking-wide">we're checking this domain's availability...</p>
         </template>
 
         <!-- Domain is taken -->
         <template v-else-if="isDomainAvailable === false">
-          <p class="text-5xl font-semibold mb-3">sorry! 😔</p>
-          <p class="text-xl tracking-wide mb-8">{{ domain }} is taken</p>
+          <p class="text-4xl sm:text-5xl font-semibold mb-3">sorry! 😔</p>
+          <p class="text-l sm:text-xl tracking-wide mb-6 sm:mb-8">{{ domain }} is taken</p>
           <pre
-            class="max-w-3xl max-h-60 mb-8 rounded bg-neutral-50 px-8 py-6 text-sm shadow-md shadow-neutral-200 overflow-auto whitespace-pre-line">{{ whoisInfo }}</pre>
+            class="max-w-3xl max-h-60 mb-8 rounded bg-neutral-50 px-5 sm:px-8 py-4 sm:py-6 text-sm shadow-md shadow-neutral-200 overflow-auto whitespace-pre-line"
+          >{{ whoisInfo }}</pre>
         </template>
 
         <!-- Domain is unknown -->
         <template v-else-if="domainAvailability === '???'">
-          <p class="text-5xl font-semibold mb-3">hmm.. 🤔</p>
-          <p class="text-xl tracking-wide">{{ domain }} might be available</p>
+          <p class="text-4xl sm:text-5xl font-semibold mb-3">hmm.. 🤔</p>
+          <p class="text-l sm:text-xl tracking-wide">{{ domain }} might be available</p>
         </template>
 
         <!-- Domain is available -->
         <template v-else>
-          <p class="text-5xl font-semibold mb-3">yay! 🎉</p>
-          <p class="text-xl tracking-wide">{{ domain }} is available!</p>
+          <p class="text-4xl sm:text-5xl font-semibold mb-3">yay! 🎉</p>
+          <p class="text-l sm:text-xl tracking-wide">{{ domain }} is available!</p>
         </template>
       </div>
 

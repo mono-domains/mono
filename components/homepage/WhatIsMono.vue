@@ -1,38 +1,38 @@
 <template>
   <div class="mb-44">
-    <h2 class="text-4xl font-bold tracking-wide mb-6">what is mono?</h2>
+    <h2 class="text-3xl sm:text-4xl font-bold tracking-wide mb-4 sm:mb-6">what is mono?</h2>
     <div class="mb-28">
-      <p class="text-xl leading-relaxed mb-2">mono is <em>the</em> domain name search engine for developers, entrepreneurs and domain name enthusiasts!</p>
-      <p class="text-xl leading-relaxed">with mono, you can get real time information on domain availability, pricing and more in seconds!</p>
+      <p class="text-l sm:text-xl leading-relaxed mb-2 sm:mb-4">mono is <em>the</em> domain name search engine for developers, entrepreneurs and domain name enthusiasts!</p>
+      <p class="text-l sm:text-xl leading-relaxed">with mono, you can get real time information on domain availability, pricing and more in seconds!</p>
     </div>
 
-    <div class="flex items-center mb-28">
-      <div class="flex-1 mr-16">
-        <h2 class="text-3xl font-bold tracking-wide mb-6">price comparisons</h2>
-        <p class="text-xl leading-relaxed mb-4">mono fetches pricing data from several reputable registrars to make sure you're getting the best price!</p>
-        <p class="text-xl leading-relaxed">we fetch our data several times a day to ensure what we're showing you is exactly what you'll pay.</p>
-      </div>
-    
-      <div class="relative w-96 mr-10 overflow-hidden">
+    <div class="flex flex-wrap items-center mb-28">
+      <div class="relative w-96 mr-10 mb-10 md:mb-0 md:order-1 overflow-hidden">
         <p class="text-2xl font-semibold mb-8">
           <span>example</span>
           <span class="text-neutral-700">.com</span>
         </p>
 
-        <ul class="flex">
+        <ul class="w-max">
           <ItemPricing
             v-for="(registrar) of comRegistrars"
             :key="registrar.name"
             :pricing="registrar"
-            class="pointer-events-none" />
+            class="!inline-block pointer-events-none" />
         </ul>
 
         <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-white" />
       </div>
+
+      <div class="basis-full flex-1 md:basis-0 md:order-0 mr-16">
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-wide mb-4 sm:mb-6">price comparisons</h2>
+        <p class="text-l sm:text-xl leading-relaxed mb-2 sm:mb-4">mono fetches pricing data from several reputable registrars to make sure you're getting the best price!</p>
+        <p class="text-l sm:text-xl leading-relaxed">we fetch our data several times a day to ensure what we're showing you is exactly what you'll pay.</p>
+      </div>
     </div>
 
-    <div class="flex items-center">
-      <div class="relative w-96 ml-10 overflow-hidden">
+    <div class="flex flex-wrap items-center">
+      <div class="relative w-96 mb-10 md:mb-0 md:ml-10 overflow-hidden">
         <div class="relative">
           <div class="bg-neutral-50 text-2xl shadow-md shadow-neutral-200 rounded pl-14 py-4 tracking-wide leading-none mb-6">
             cheap cars
@@ -62,10 +62,10 @@
         <div class="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-white" />
       </div>
 
-      <div class="flex-1 ml-16">
-        <h2 class="text-3xl font-bold tracking-wide mb-6">domain hacks</h2>
-        <p class="text-xl leading-relaxed mb-4">mono automatically detects and includes domain hacks in your search results to help you find shorter (and cooler) domains.</p>
-        <p class="text-xl leading-relaxed">
+      <div class="basis-full md:basis-0 flex-1 md:ml-16">
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-wide mb-4 sm:mb-6">domain hacks</h2>
+        <p class="text-l sm:text-xl leading-relaxed mb-2 sm:mb-4">mono automatically detects and includes domain hacks in your search results to help you find shorter (and cooler) domains.</p>
+        <p class="text-l sm:text-xl leading-relaxed">
           <BaseLink to="https://en.wikipedia.org/wiki/Domain_hack">
             read more about domain hacks
           </BaseLink>
