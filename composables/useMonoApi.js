@@ -1,7 +1,9 @@
 const requestCache = {
   search: {},
   whois: {},
-  extension: {}
+  extension: {},
+  allExtensions: null,
+  homepageStats: null
 }
 
 export const useMonoApi = () => {
@@ -63,15 +65,27 @@ export const useMonoApi = () => {
   }
 
   const getAllExtensionsFromApi = async () => {
+    if (requestCache.allExtensions) {
+      return requestCache.allExtensions
+    }
+
     const apiRequest = await makeApiCall(`/extension/all`)
     const apiJson = await apiRequest.json()
+
+    requestCache.allExtensions = apiJson
 
     return apiJson
   }
 
   const getHomepageStatsFromApi = async () => {
+    if (requestCache.homepageStats) {
+      return requestCache.homepageStats
+    }
+
     const apiRequest = await makeApiCall(`/homepageStats`)
     const apiJson = await apiRequest.json()
+
+    requestCache.homepageStats = apiJson
 
     return apiJson
   }
