@@ -1,3 +1,45 @@
+<script setup>
+const { getAllExtensionsFromApi } = useMonoApi()
+
+const allExtensions = await getAllExtensionsFromApi()
+
+const extensions = {}
+
+// We want to now group these into alphabetical order
+allExtensions.results.forEach((extension) => {
+  const extensionName = extension.name
+  const extensionStart = extensionName.substring(1, 2)
+
+  let extensionPointer = null
+
+  if (extensionName.startsWith('.xn--') || !extensionStart.match(/[a-z]/)) {
+    extensionPointer = '#'
+  } else {
+    extensionPointer = extensionStart
+  }
+
+  if (extensions[extensionPointer]) {
+    extensions[extensionPointer].push(extension)
+  } else {
+    extensions[extensionPointer] = [extension]
+  }
+})
+
+const extensionsCount = allExtensions.results.length
+
+// Let's also set the page metadata
+useHead({
+  title: `all extensions - mono domains`,
+  meta: [
+    { hid: 'description', name: 'description', content: `a list of all ${extensionsCount} extensions mono is tracking and their cheapest prices!` },
+    { hid: 'canonical', rel: 'canonical', href: 'https://mono.domains/extensions' },
+    { hid: 'twitter:site', name: 'twitter:site', content: 'https://mono.domains/extensions' },
+    { hid: 'og:description', property: 'og:description', content: `a list of all ${extensionsCount} extensions mono is tracking and their cheapest prices!` },
+    { hid: 'og:url', property: 'og:url', content: 'https://mono.domains/extensions' },
+  ]
+})
+</script>
+
 <template>
   <PageHeader />
 
@@ -20,38 +62,6 @@ import { helpers } from '../../mixins/helpers'
 
 export default {
   name: 'ExtensionsPage',
-  mixins: [helpers],
-  async setup() {
-    const { getAllExtensionsFromApi } = useMonoApi()
-
-    const allExtensions = await getAllExtensionsFromApi()
-
-    const extensions = {}
-
-    // We want to now group these into alphabetical order
-    allExtensions.results.forEach((extension) => {
-      const extensionName = extension.name
-      const extensionStart = extensionName.substring(1, 2)
-
-      let extensionPointer = null
-
-      if (extensionName.startsWith('.xn--') || !extensionStart.match(/[a-z]/)) {
-        extensionPointer = '#'
-      } else {
-        extensionPointer = extensionStart
-      }
-
-      if (extensions[extensionPointer]) {
-        extensions[extensionPointer].push(extension)
-      } else {
-        extensions[extensionPointer] = [extension]
-      }
-    })
-
-    return {
-      extensions,
-      extensionsCount: allExtensions.results.length
-    }
-  }
+  mixins: [helpers]
 }
 </script>

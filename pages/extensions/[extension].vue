@@ -1,10 +1,33 @@
+<script setup>
+const { getExtensionPricingResultFromApi } = useMonoApi()
+
+const route = useRoute()
+const extension = route.params.extension
+const encodedExtension = punycode.toUnicode(extension)
+
+const extensionPricing = await getExtensionPricingResultFromApi(extension)
+const registrars = extensionPricing.registrars
+
+// Let's set the page metadata
+useHead({
+  title: `${encodedExtension} extension - mono domains`,
+  meta: [
+    { hid: 'description', name: 'description', content: `starting from $${registrars[0].registerPrice.toFixed(2)} - a list of all registrars supporting ${encodedExtension} and their cheapest prices!` },
+    { hid: 'canonical', rel: 'canonical', href: `https://mono.domains/extensions/${extension}` },
+    { hid: 'twitter:site', name: 'twitter:site', content: `https://mono.domains/extensions/${extension}` },
+    { hid: 'og:description', property: 'og:description', content: `starting from $${registrars[0].registerPrice.toFixed(2)} - a list of all registrars supporting ${encodedExtension} and their cheapest prices!` },
+    { hid: 'og:url', property: 'og:url', content: `https://mono.domains/extensions/${extension}` },
+  ]
+})
+</script>
+
 <template>
   <PageHeader />
 
   <div class="w-full max-w-5xl mx-auto px-4 sm:px-6 py-24 sm:py-32 md:py-44">
-    <h1 class="text-6xl sm:text-8xl font-bold leading-none -ml-0.5 mb-4">{{ extension }}</h1>
+    <h1 class="text-6xl sm:text-8xl font-bold leading-none -ml-0.5 mb-4">{{ encodedExtension }}</h1>
     <p class="text-l sm:text-xl leading-relaxed mb-10 sm:mb-12">
-      the <span class="font-semibold">{{ extension }} {{ extension !== rawExtension ? `(${rawExtension})` : '' }}</span>
+      the <span class="font-semibold">{{ encodedExtension }} {{ encodedExtension !== extension ? `(${extension})` : '' }}</span>
       extension is available from
       <span class="font-semibold">{{ registrars.length }}</span> {{ registrars.length > 1 ? 'registrars' : 'registrar' }},
       starting from
@@ -28,20 +51,6 @@ import { helpers } from '../../mixins/helpers'
 
 export default {
   name: 'ExtensionPage',
-  mixins: [helpers],
-  async setup() {
-    const { getExtensionPricingResultFromApi } = useMonoApi()
-
-    const route = useRoute()
-    const extension = route.params.extension
-
-    const extensionPricing = await getExtensionPricingResultFromApi(extension)
-
-    return {
-      extension: punycode.toUnicode(extension),
-      rawExtension: extension,
-      registrars: extensionPricing.registrars
-    }
-  }
+  mixins: [helpers]
 }
 </script>
