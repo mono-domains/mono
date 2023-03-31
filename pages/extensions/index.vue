@@ -34,6 +34,7 @@ useHead({
     { hid: 'description', name: 'description', content: `a list of all ${extensionsCount} extensions mono is tracking and their cheapest prices!` },
     { hid: 'canonical', rel: 'canonical', href: 'https://mono.domains/extensions' },
     { hid: 'twitter:site', name: 'twitter:site', content: 'https://mono.domains/extensions' },
+    { hid: 'og:title', property: 'og:title', content: `all extensions - mono domains` },
     { hid: 'og:description', property: 'og:description', content: `a list of all ${extensionsCount} extensions mono is tracking and their cheapest prices!` },
     { hid: 'og:url', property: 'og:url', content: 'https://mono.domains/extensions' },
   ]

@@ -19,7 +19,7 @@ export default defineNuxtConfig({
         { hid: 'twitter:site', name: 'twitter:site', content: 'https://mono.domains' },
         { hid: 'twitter:image', name: 'twitter:image', content: 'https://mono.domains/android-chrome-512x512.png' },
         { property: 'og:type', content: 'website' },
-        { hid: 'og:title', property: 'og:title', content: 'mono domains' },
+        { hid: 'og:title', property: 'og:title', content: 'mono domains - domain search and pricing for developers' },
         { hid: 'og:description', property: 'og:description', content: 'the domain name search engine for developers, entrepreneurs and domain name enthusiasts!' },
         { hid: 'og:url', property: 'og:url', content: 'https://mono.domains' },
         { property: 'og:site_name', content: 'mono domains' },
