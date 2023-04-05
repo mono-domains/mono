@@ -31,6 +31,7 @@ export default {
     return {
       searchTerm: '',
       searchResults: [],
+      examplePrefix: '',
       exampleSearch: ''
     }
   },
@@ -42,11 +43,6 @@ export default {
       searchTerm = searchTerm.replace(/[^a-zA-Z0-9\-.]/g, '')
 
       return searchTerm
-    },
-    examplePrefix() {
-      const prefixes = ['unsure?', 'maybe', 'why not']
-
-      return this.getRandomItem(prefixes)
     }
   },
   mounted() {
@@ -91,9 +87,11 @@ export default {
       }
     },
     setExampleSearch() {
+      const prefixes = ['unsure?', 'maybe', 'why not']
       const firstWords = ['awesome', 'cheap', 'cool', 'exotic', 'interesting']
       const secondWords = ['cars', 'domains', 'website', 'gifts', 'holiday']
 
+      this.examplePrefix = this.getRandomItem(prefixes)
       this.exampleSearch = `${this.getRandomItem(firstWords)} ${this.getRandomItem(secondWords)}`
     },
     getRandomItem(array) {
