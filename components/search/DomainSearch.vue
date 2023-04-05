@@ -1,6 +1,18 @@
 <template>
-  <DomainSearchInput @onInput="onSearchInput" />
-  <DomainSearchResults :results="searchResults" />
+  <DomainSearchInput ref="searchInput" @onInput="onSearchInput" />
+
+  <div v-auto-animate>
+    <p v-if="exampleSearch && searchResults.length === 0" class="mt-6 sm:mt-8 text-xl sm:text-2xl opacity-75 hover:opacity-100 transition-opacity duration-300">
+      try
+      '<a
+        href="#"
+        class="text-sky-700 decoration-1 underline underline-offset-4 decoration-transparent hover:decoration-current transition-colors duration-300"
+        @click.prevent="doSearch(exampleSearch)"
+      >{{ exampleSearch }}</a>'
+    </p>
+
+    <DomainSearchResults v-if="searchResults.length > 0" :results="searchResults" />
+  </div>
 </template>
 
 <script>
@@ -18,7 +30,8 @@ export default {
   data() {
     return {
       searchTerm: '',
-      searchResults: []
+      searchResults: [],
+      exampleSearch: ''
     }
   },
   computed: {
@@ -30,6 +43,9 @@ export default {
 
       return searchTerm
     }
+  },
+  mounted() {
+    this.setExampleSearch()
   },
   methods: {
     onSearchInput(input) {
@@ -66,8 +82,24 @@ export default {
         this.searchResults = formattedSearchResults
       } catch (e) {
         // Error reporting, improve this later
-        alert(e.message)
+        // alert(e.message)
       }
+    },
+    setExampleSearch() {
+      const firstWords = ['awesome', 'cheap', 'cool', 'exotic', 'interesting']
+      const secondWords = ['cars', 'domains', 'website', 'gifts', 'holiday']
+
+      this.exampleSearch = `${this.pickRandomItem(firstWords)} ${this.pickRandomItem(secondWords)}`
+    },
+    pickRandomItem(array) {
+      return array[Math.floor(Math.random() * array.length)]
+    },
+    async doSearch(search) {
+      this.$refs.searchInput.input = search
+      this.searchTerm = search
+      await this.getSearchResults()
+
+      setTimeout(this.setExampleSearch, 750)
     }
   }
 }

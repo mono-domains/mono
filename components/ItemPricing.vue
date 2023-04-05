@@ -19,9 +19,20 @@
 
     <div
       v-if="pricing.isOnSale"
-      class="absolute top-0 right-0 flex justify-center items-center leading-3 bg-red-500 font-semibold text-white rounded-full translate-x-1/3 -translate-y-1/3 -rotate-6"
-      :class="saleRibbonSizeClasses">
-      %
+      class="absolute top-0 right-0 translate-x-1/3 -translate-y-1/3">
+      <BaseTooltip ariaLabel="isOnSale" class="translate-y-px">
+        <template #label>
+          <span
+            class="flex justify-center items-center leading-3 bg-red-500 font-semibold text-white rounded-full -rotate-6"
+            :class="saleRibbonSizeClasses">
+            %
+          </span>
+        </template>
+        <template #tooltip>
+          this extension is on sale!
+        </template>
+      </BaseTooltip>
+      
     </div>
   </li>
 </template>
@@ -55,7 +66,7 @@ export default {
   computed: {
     sizeClasses() {
       if (this.isLarge) {
-        return 'w-28 sm:w-32 text-sm sm:text-base'
+        return 'w-32 text-base'
       }
 
       return 'w-28 text-sm'

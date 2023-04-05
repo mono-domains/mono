@@ -1,9 +1,9 @@
 export default {
   theme: {
-    fontFamily: {
-      sans: ['Geomanist', 'sans-serif']
-    },
     extend: {
+      fontFamily: {
+        sans: ['Geomanist', 'sans-serif']
+      },
       width: {
         '5.25': '21px'
       },

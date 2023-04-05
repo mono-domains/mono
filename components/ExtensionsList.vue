@@ -7,7 +7,7 @@
           v-for="(section, i) of sections"
           :key="section + i"
           :href="`#${section}`"
-          class="text-sky-600"
+          class="text-sky-700 decoration-1 underline underline-offset-4 decoration-transparent hover:decoration-current transition-colors duration-300"
           @click.prevent="jumpToSection(section)">
           {{ section }}
         </a>
