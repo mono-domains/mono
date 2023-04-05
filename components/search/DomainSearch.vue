@@ -2,8 +2,8 @@
   <DomainSearchInput ref="searchInput" @onInput="onSearchInput" />
 
   <div v-auto-animate>
-    <p v-if="exampleSearch && searchResults.length === 0" class="mt-6 sm:mt-8 text-xl sm:text-2xl opacity-75 hover:opacity-100 transition-opacity duration-300">
-      try
+    <p v-if="exampleSearch && searchResults.length === 0" class="mt-6 sm:mt-8 text-xl sm:text-2xl transition-opacity duration-300">
+      {{ examplePrefix }} try
       '<a
         href="#"
         class="text-sky-700 decoration-1 underline underline-offset-4 decoration-transparent hover:decoration-current transition-colors duration-300"
@@ -42,10 +42,15 @@ export default {
       searchTerm = searchTerm.replace(/[^a-zA-Z0-9\-.]/g, '')
 
       return searchTerm
+    },
+    examplePrefix() {
+      const prefixes = ['unsure?', 'maybe', 'why not']
+
+      return this.getRandomItem(prefixes)
     }
   },
   mounted() {
-    this.setExampleSearch()
+    setTimeout(this.setExampleSearch, 1000)
   },
   methods: {
     onSearchInput(input) {
@@ -89,9 +94,9 @@ export default {
       const firstWords = ['awesome', 'cheap', 'cool', 'exotic', 'interesting']
       const secondWords = ['cars', 'domains', 'website', 'gifts', 'holiday']
 
-      this.exampleSearch = `${this.pickRandomItem(firstWords)} ${this.pickRandomItem(secondWords)}`
+      this.exampleSearch = `${this.getRandomItem(firstWords)} ${this.getRandomItem(secondWords)}`
     },
-    pickRandomItem(array) {
+    getRandomItem(array) {
       return array[Math.floor(Math.random() * array.length)]
     },
     async doSearch(search) {
