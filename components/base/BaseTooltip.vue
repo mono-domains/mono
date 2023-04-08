@@ -1,6 +1,6 @@
 <template>
   <span class="group inline-block relative" tabindex="0">
-    <span class="baseInfoTooltip__label" :aria-describedby="ariaId"><slot name="label" /></span>
+    <span :aria-describedby="ariaId"><slot name="label" /></span>
 
     <span
       role="tooltip"

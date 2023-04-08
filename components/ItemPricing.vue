@@ -20,7 +20,7 @@
     <div
       v-if="pricing.isOnSale"
       class="absolute top-0 right-0 translate-x-1/3 -translate-y-1/3">
-      <BaseTooltip ariaLabel="isOnSale" class="translate-y-px">
+      <BaseTooltip :ariaId="saleTooltipAriaId" class="translate-y-px">
         <template #label>
           <span
             class="flex justify-center items-center leading-3 bg-red-500 font-semibold text-white rounded-full -rotate-6"
@@ -80,6 +80,12 @@ export default {
     },
     decodedName() {
       return punycode.toUnicode(this.pricing.name)
+    },
+    saleTooltipAriaId() {
+      const pricingName = this.pricing.name.toLowerCase()
+      const cleanedPricingName = pricingName.replace(/[^a-z0-9]/g, '')
+
+      return `${cleanedPricingName}IsOnSale`
     }
   }
 }
