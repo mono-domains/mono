@@ -50,6 +50,20 @@ export const useMonoApi = () => {
   }
 
   const getExtensionPricingResultFromApi = async (extension) => {
+    // Determine the extension category
+    let extensionCategory = extension.substring(1, 2)
+
+    if (extension.startsWith('.xn--') || !extensionCategory.match(/[a-z]/)) {
+      extensionCategory = '#'
+    }
+
+    // If the allExtensions request is cached, fetch from there
+    if (requestCache.allExtensions) {
+      const allExtensionResults = requestCache.allExtensions.results
+
+      return allExtensionResults[extensionCategory][extension]
+    }
+
     // Check the cache first
     if (requestCache.extension[extension]) {
       return requestCache.extension[extension]

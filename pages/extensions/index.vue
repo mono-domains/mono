@@ -6,26 +6,26 @@ const allExtensions = await getAllExtensionsFromApi()
 const extensions = {}
 
 // We want to now group these into alphabetical order
-allExtensions.results.forEach((extension) => {
-  const extensionName = extension.name
-  const extensionStart = extensionName.substring(1, 2)
+for (const [category, extensionList] of Object.entries(allExtensions.results)) {
+  const formattedExtensionsList = []
 
-  let extensionPointer = null
+  Object.values(extensionList).forEach((extension) => {
+    if (!extension.registrars) {
+      return
+    }
 
-  if (extensionName.startsWith('.xn--') || !extensionStart.match(/[a-z]/)) {
-    extensionPointer = '#'
-  } else {
-    extensionPointer = extensionStart
-  }
+    formattedExtensionsList.push({
+      'name': extension.extension,
+      'registerPrice': extension.registrars[0].registerPrice,
+      'renewalPrice': extension.registrars[0].renewalPrice,
+      'isOnSale': !!extension.registrars[0].isOnSale
+    })
+  })
 
-  if (extensions[extensionPointer]) {
-    extensions[extensionPointer].push(extension)
-  } else {
-    extensions[extensionPointer] = [extension]
-  }
-})
+  extensions[category] = formattedExtensionsList
+}
 
-const extensionsCount = allExtensions.results.length
+const extensionsCount = Object.values(extensions).reduce((partialLength, category) => partialLength + category.length, 0)
 
 // Let's also set the page metadata
 useHead({

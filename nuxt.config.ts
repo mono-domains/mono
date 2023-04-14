@@ -1,6 +1,6 @@
 import fetch from 'node-fetch'
 
-const apiBase = process.env.NODE_ENV === 'development' ? 'http://localhost' : 'https://api.mono.domains'
+const apiBase = process.env.NODE_ENV === 'development' ? 'http://localhost' : 'http://localhost'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -60,9 +60,13 @@ export default defineNuxtConfig({
       const apiRequest = await fetch(apiBase + '/extension/all')
       const apiJson = await apiRequest.json()
 
+      nitroConfig.prerender.routes.push(`/extensions`)
+
       // Then add them to the prerender routes list
-      apiJson.results.forEach((extension) => {
-        nitroConfig.prerender.routes.push(`/extensions/${extension.name}`)
+      Object.values(apiJson.results).forEach((extensionList) => {
+        Object.values(extensionList).forEach((extension) => {
+          nitroConfig.prerender.routes.push(`/extensions/${extension.extension}`)
+        })
       })
     }
   }

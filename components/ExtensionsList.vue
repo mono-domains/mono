@@ -22,7 +22,7 @@
       <ul class="flex flex-wrap mb-6">
         <ItemPricing
           v-for="(extension) of extensions[section]"
-          :key="extension.name"
+          :key="extension.extension"
           :isExtension="true"
           :isLarge="true"
           :pricing="extension"

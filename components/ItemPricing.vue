@@ -9,7 +9,7 @@
       :class="isLarge ? 'py-1.5' : 'py-1'"
       :noPrefetch="prefetch === false ? true : null">
       <p class="font-semibold tracking-wide">{{ decodedName }}</p>
-      <p class="tracking-wide">{{ isExtension ? 'from ' : '' }}${{ formatNumber(pricing.registerPrice) }}</p>
+      <p class="tracking-wide">from ${{ formatNumber(pricing.registerPrice) }}</p>
     </NuxtLink>
 
     <a v-else :href="pricing.registerUrl" class="block w-full" :class="isLarge ? 'py-1.5' : 'py-1'" target="_blank" rel="noopener">
@@ -32,7 +32,6 @@
           this extension is on sale!
         </template>
       </BaseTooltip>
-      
     </div>
   </li>
 </template>
