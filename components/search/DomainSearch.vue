@@ -40,7 +40,6 @@ export default {
       let searchTerm = this.searchTerm.toLowerCase()
 
       searchTerm = searchTerm.replace(/^[a-z]*(?:\:\/\/)/, '')
-      searchTerm = searchTerm.replace(/[^a-zA-Z0-9\-.]/g, '')
 
       return searchTerm
     }
@@ -66,7 +65,9 @@ export default {
         return
       }
 
-      const searchTerm = punycode.toASCII(this.sanitizedSearchTerm)
+      let searchTerm = punycode.toASCII(this.sanitizedSearchTerm)
+
+      searchTerm = searchTerm.replace(/[^a-zA-Z0-9\-.]/g, '')
 
       try {
         const searchResponse = await this.getSearchResultsFromApi(searchTerm)
@@ -74,9 +75,9 @@ export default {
 
         const formattedSearchResults = searchResults.map((result) => {
           return {
-            extension: result.extension,
+            extension: this.getDecodedExtension(result.extension),
             domain: punycode.toUnicode(result.domain),
-            subdomains: result.subdomains
+            subdomains: punycode.toUnicode(result.subdomains)
           }
         })
 
@@ -103,6 +104,11 @@ export default {
       await this.getSearchResults()
 
       setTimeout(this.setExampleSearch, 750)
+    },
+    getDecodedExtension(extension) {
+      extension.extension = punycode.toUnicode(extension.extension)
+
+      return extension
     }
   }
 }

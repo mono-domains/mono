@@ -9,10 +9,10 @@
       <h2 class="flex-1 font-semibold tracking-wide">
         <span v-if="result.subdomains" class="text-neutral-400">{{ result.subdomains }}</span>
         <span class="break-all">{{ result.domain }}</span>
-        <span class="text-neutral-700">{{ result.extension.extension }}</span>
+        <span :class="isExtension ? '' : 'text-neutral-700'">{{ result.extension.extension }}</span>
       </h2>
       
-      <span :class="{
+      <span v-if="!isExtension" :class="{
         'text-amber-500': domainAvailability === '???',
         'text-red-500': domainAvailability === 'no',
         'text-green-500': domainAvailability === 'yes'
@@ -22,9 +22,14 @@
     </button>
 
     <div v-if="isExpanded" class="mt-6 mb-8 sm:pl-4" v-auto-animate>
-      <div class=" mb-6 sm:mb-8">
+      <div class="mb-6 sm:mb-8">
+        <template v-if="isExtension">
+          <p class="text-4xl sm:text-5xl font-semibold mb-3">{{ result.extension.extension }}</p>
+          <p class="text-l sm:text-xl tracking-wide">{{ result.extension.extension }} is a domain extension</p>
+        </template>
+
         <!-- Checking Whois -->
-        <template v-if="whoisSearchStatus === 'pending'">
+        <template v-else-if="whoisSearchStatus === 'pending'">
           <p class="text-4xl sm:text-5xl font-semibold mb-3">one sec.. ⚙️</p>
           <p class="text-l sm:text-xl tracking-wide">we're checking this domain's availability</p>
         </template>
@@ -110,6 +115,9 @@ export default {
       const cleanedDomain = this.domain.replace(/[^a-z0-9]/g, '')
 
       return `${cleanedDomain}MaybeAvailable`
+    },
+    isExtension() {
+      return this.result.domain === ''
     }
   },
   mounted() {
@@ -117,6 +125,11 @@ export default {
   },
   methods: {
     async setDomainAvailabilityInfo() {
+      // This is just an extension, no need to do a whois search
+      if (this.isExtension) {
+        return
+      }
+
       const punycodedDomain = punycode.toASCII(this.domain)
 
       try {
