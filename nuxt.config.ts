@@ -6,21 +6,21 @@ const apiBase = process.env.NODE_ENV === 'development' ? 'http://localhost' : 'h
 export default defineNuxtConfig({
   app: {
     head: {
-      title: 'mono domains - domain search and pricing for developers',
+      title: 'mono domains - awesome domains for the cheapest prices',
       htmlAttrs: {
         lang: 'en'
       },
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { hid: 'description', name: 'description', content: 'the domain name search engine for developers, entrepreneurs and domain name enthusiasts!' },
+        { hid: 'description', name: 'description', content: 'mono domains is a domain search engine that helps you find the cheapest domain names. with mono, you can find awesome domain names for the best prices!' },
         { name: 'format-detection', content: 'telephone=no' },
         { hid: 'canonical', rel: 'canonical', href: 'https://mono.domains' },
         { hid: 'twitter:site', name: 'twitter:site', content: 'https://mono.domains' },
         { hid: 'twitter:image', name: 'twitter:image', content: 'https://mono.domains/android-chrome-512x512.png' },
         { property: 'og:type', content: 'website' },
-        { hid: 'og:title', property: 'og:title', content: 'mono domains - domain search and pricing for developers' },
-        { hid: 'og:description', property: 'og:description', content: 'the domain name search engine for developers, entrepreneurs and domain name enthusiasts!' },
+        { hid: 'og:title', property: 'og:title', content: 'mono domains - awesome domains for the cheapest prices' },
+        { hid: 'og:description', property: 'og:description', content: 'mono domains is a domain search engine that helps you find the cheapest domain names. with mono, you can find awesome domain names for the best prices!' },
         { hid: 'og:url', property: 'og:url', content: 'https://mono.domains' },
         { property: 'og:site_name', content: 'mono domains' },
         { hid: 'og:image', property: 'og:image', content: 'https://mono.domains/android-chrome-512x512.png' }

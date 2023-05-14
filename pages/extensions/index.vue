@@ -29,13 +29,13 @@ const extensionsCount = Object.values(extensions).reduce((partialLength, categor
 
 // Let's also set the page metadata
 useHead({
-  title: `all extensions - mono domains`,
+  title: `mono domains - all domain extensions`,
   meta: [
-    { hid: 'description', name: 'description', content: `a list of all ${extensionsCount} extensions mono is tracking and their cheapest prices!` },
+    { hid: 'description', name: 'description', content: `a list of all ${extensionsCount} extensions mono is tracking and their cheapest prices. find the cheapest domain prices with mono domains!` },
     { hid: 'canonical', rel: 'canonical', href: 'https://mono.domains/extensions' },
     { hid: 'twitter:site', name: 'twitter:site', content: 'https://mono.domains/extensions' },
-    { hid: 'og:title', property: 'og:title', content: `all extensions - mono domains` },
-    { hid: 'og:description', property: 'og:description', content: `a list of all ${extensionsCount} extensions mono is tracking and their cheapest prices!` },
+    { hid: 'og:title', property: 'og:title', content: `mono domains - all domain extensions` },
+    { hid: 'og:description', property: 'og:description', content: `a list of all ${extensionsCount} extensions mono is tracking and their cheapest prices. find the cheapest domain prices with mono domains!` },
     { hid: 'og:url', property: 'og:url', content: 'https://mono.domains/extensions' },
   ]
 })
@@ -49,7 +49,7 @@ useHead({
     <p class="text-l sm:text-xl leading-relaxed mb-2">
       here's a list of the
       <span class="font-semibold">{{ formatNumber(extensionsCount) }}</span>
-      different extensions that mono has pricing data for.
+      different domain extensions that mono is tracking with their cheapest prices.
     </p>
 
     <ExtensionsList :extensions="extensions" />

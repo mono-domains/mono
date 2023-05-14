@@ -25,8 +25,8 @@
       </div>
 
       <div class="basis-full flex-1 md:basis-0 md:order-0 mr-16">
-        <h2 class="text-2xl sm:text-3xl font-bold tracking-wide mb-4 sm:mb-6">price comparisons</h2>
-        <p class="text-l sm:text-xl leading-relaxed mb-2 sm:mb-4">mono fetches pricing data from several reputable registrars to make sure you're getting the best price!</p>
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-wide mb-4 sm:mb-6">cheapest domain names</h2>
+        <p class="text-l sm:text-xl leading-relaxed mb-2 sm:mb-4">mono fetches pricing data from several reputable registrars to make sure you can find the cheapest domain name prices!</p>
         <p class="text-l sm:text-xl leading-relaxed">we fetch our data several times a day to ensure what we're showing you is exactly what you'll pay.</p>
       </div>
     </div>
@@ -38,7 +38,7 @@
             cheap cars
           </div>
 
-          <div class="absolute top-0 left-0 w-14 h-full pt-0.5 pl-0.5 flex justify-center" @click="emitEvent(input)">
+          <div class="absolute top-0 left-0 w-14 h-full pt-0.5 pl-0.5 flex justify-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -64,7 +64,8 @@
 
       <div class="basis-full md:basis-0 flex-1 md:ml-16">
         <h2 class="text-2xl sm:text-3xl font-bold tracking-wide mb-4 sm:mb-6">domain hacks</h2>
-        <p class="text-l sm:text-xl leading-relaxed mb-2 sm:mb-4">mono automatically detects and includes domain hacks in your search results to help you find shorter (and cooler) domains.</p>
+        <p class="text-l sm:text-xl leading-relaxed mb-2 sm:mb-4">mono automatically detects and includes domain hacks in your search results.</p>
+        <p class="text-l sm:text-xl leading-relaxed mb-2 sm:mb-4">domain hacks can help you create a shorter, more memorable and cooler domain name!</p>
         <p class="text-l sm:text-xl leading-relaxed">
           <BaseLink to="https://en.wikipedia.org/wiki/Domain_hack">
             read more about domain hacks

@@ -1,6 +1,10 @@
 <template>
   <ul class="flex flex-wrap -mb-3">
-    <h3 class="w-full font-semibold tracking-wide text-xl sm:text-2xl mb-4">cheapest registration</h3>
+    <component
+      :is="extension ? 'h2' : 'h3'"
+      class="w-full font-semibold tracking-wide text-xl sm:text-2xl mb-4">
+      cheapest {{ extension }} registration
+    </component>
     <ItemPricing
       :isLarge="true"
       :pricing="cheapestRegistrar" />
@@ -18,6 +22,10 @@
 export default {
   name: 'RegistrarPricing',
   props: {
+    extension: {
+      type: String,
+      default: ''
+    },
     registrars: {
       type: Array,
       default: null

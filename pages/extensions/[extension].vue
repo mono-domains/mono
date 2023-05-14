@@ -10,13 +10,13 @@ const registrars = extensionPricing.registrars
 
 // Let's set the page metadata
 useHead({
-  title: `${encodedExtension} extension - mono domains`,
+  title: `mono domains - cheapest ${extension} domain prices`,
   meta: [
-    { hid: 'description', name: 'description', content: `starting from $${registrars[0].registerPrice.toFixed(2)} - a list of all registrars supporting ${encodedExtension} and their cheapest prices!` },
+    { hid: 'description', name: 'description', content: `starting from $${registrars[0].registerPrice.toFixed(2)} - a list of all registrars supporting ${encodedExtension} and their cheapest prices. find the cheapest domain prices with mono domains!` },
     { hid: 'canonical', rel: 'canonical', href: `https://mono.domains/extensions/${extension}` },
     { hid: 'twitter:site', name: 'twitter:site', content: `https://mono.domains/extensions/${extension}` },
-    { hid: 'og:title', property: 'og:title', content: `${encodedExtension} extension - mono domains` },
-    { hid: 'og:description', property: 'og:description', content: `starting from $${registrars[0].registerPrice.toFixed(2)} - a list of all registrars supporting ${encodedExtension} and their cheapest prices!` },
+    { hid: 'og:title', property: 'og:title', content: `mono domains - cheapest ${extension} domain prices` },
+    { hid: 'og:description', property: 'og:description', content: `starting from $${registrars[0].registerPrice.toFixed(2)} - a list of all registrars supporting ${encodedExtension} and their cheapest prices. find the cheapest domain prices with mono domains!` },
     { hid: 'og:url', property: 'og:url', content: `https://mono.domains/extensions/${extension}` },
   ]
 })
@@ -35,7 +35,7 @@ useHead({
       <span class="font-semibold">${{ formatNumber(registrars[0].registerPrice) }}</span>.
     </p>
 
-    <RegistrarPricing :registrars="registrars" />
+    <RegistrarPricing :extension="encodedExtension" :registrars="registrars" />
 
     <p class="text-l sm:text-xl text-center mt-16 sm:mt-24">
       <BaseLink to="/extensions">back to extensions list</BaseLink>
