@@ -43,6 +43,12 @@ export default defineNuxtConfig({
       pathPrefix: false
     }
   ],
+
+  ssr: true,
+
+  nitro: {
+    serveStatic: 'node'
+  },
   
   runtimeConfig: {
     public: {
