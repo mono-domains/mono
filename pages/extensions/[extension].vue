@@ -8,6 +8,8 @@ const encodedExtension = punycode.toUnicode(extension)
 const extensionPricing = await getExtensionPricingResultFromApi(extension)
 const registrars = extensionPricing.registrars
 
+console.log(extensionPricing.extension)
+
 // Let's set the page metadata
 useHead({
   title: `mono domains - cheapest ${extension} domain prices`,

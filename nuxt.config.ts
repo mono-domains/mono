@@ -45,10 +45,6 @@ export default defineNuxtConfig({
   ],
 
   ssr: true,
-
-  nitro: {
-    serveStatic: 'node'
-  },
   
   runtimeConfig: {
     public: {
