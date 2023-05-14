@@ -48,7 +48,7 @@ useHead({
 <script>
 import punycode from 'punycode'
 
-import { helpers } from '../../mixins/helpers'
+import { helpers } from '../../../mixins/helpers'
 
 export default {
   name: 'ExtensionPage',

@@ -1,6 +1,7 @@
 import fetch from 'node-fetch'
 
-const apiBase = process.env.NODE_ENV === 'development' ? 'http://localhost' : 'https://api.mono.domains'
+// const apiBase = process.env.NODE_ENV === 'development' ? 'http://localhost' : 'https://api.mono.domains'
+const apiBase = 'https://api.mono.domains'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
