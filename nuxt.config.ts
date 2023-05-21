@@ -68,7 +68,7 @@ export default defineNuxtConfig({
       // Then add them to the prerender routes list
       Object.values(apiJson.results).forEach((extensionList) => {
         Object.values(extensionList).forEach((extension) => {
-          nitroConfig.prerender.routes.push(`/extensions/${extension.extension}`)
+          nitroConfig.prerender.routes.push(`/extensions/${extension.extension.substring(1)}`)
         })
       })
     }

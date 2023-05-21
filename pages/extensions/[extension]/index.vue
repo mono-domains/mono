@@ -2,7 +2,7 @@
 const { getExtensionPricingResultFromApi } = useMonoApi()
 
 const route = useRoute()
-const extension = route.params.extension
+const extension = '.' + route.params.extension
 const encodedExtension = punycode.toUnicode(extension)
 
 const extensionPricing = await getExtensionPricingResultFromApi(extension)
