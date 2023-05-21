@@ -36,7 +36,10 @@ export default defineNuxtConfig({
     }
   },
 
-  modules: ['@nuxtjs/tailwindcss'],
+  modules: [
+    '@nuxtjs/tailwindcss',
+    'nuxt-simple-sitemap'
+  ],
 
   components: [
     {
@@ -46,6 +49,10 @@ export default defineNuxtConfig({
   ],
 
   ssr: true,
+
+  sitemap: {
+    siteUrl: 'https://mono.domains',
+  },
   
   runtimeConfig: {
     public: {
@@ -56,7 +63,7 @@ export default defineNuxtConfig({
   vite: {
     logLevel: 'silent'
   },
-  
+
   hooks: {
     'nitro:config': async (nitroConfig) => {
       if (nitroConfig.dev) {
