@@ -52,6 +52,10 @@ export default defineNuxtConfig({
       apiBase
     }
   },
+
+  vite: {
+    logLevel: 'silent'
+  },
   
   hooks: {
     'nitro:config': async (nitroConfig) => {
@@ -68,6 +72,8 @@ export default defineNuxtConfig({
       // Then add them to the prerender routes list
       Object.values(apiJson.results).forEach((extensionList) => {
         Object.values(extensionList).forEach((extension) => {
+          // Files/directories starting with . are ignored in Netlify deploys,
+          // so exclude the . from the generated route
           nitroConfig.prerender.routes.push(`/extensions/${extension.extension.substring(1)}`)
         })
       })

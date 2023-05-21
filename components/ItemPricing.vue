@@ -4,7 +4,7 @@
     :class="sizeClasses">
     <NuxtLink
       v-if="isExtension"
-      :to="`/extensions/${pricing.name}`"
+      :to="`/extensions/${pricing.name.substring(1)}`"
       class="block w-full"
       :class="isLarge ? 'py-1.5' : 'py-1'"
       :noPrefetch="prefetch === false ? true : null">
