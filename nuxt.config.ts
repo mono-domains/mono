@@ -52,6 +52,7 @@ export default defineNuxtConfig({
 
   sitemap: {
     siteUrl: 'https://mono.domains',
+    trailingSlash: true,
   },
   
   runtimeConfig: {
