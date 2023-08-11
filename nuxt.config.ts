@@ -61,6 +61,10 @@ export default defineNuxtConfig({
     }
   },
 
+  build: {
+    transpile: ['@formkit/auto-animate']
+  },
+
   vite: {
     logLevel: 'silent'
   },
