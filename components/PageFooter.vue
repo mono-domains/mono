@@ -5,15 +5,12 @@
       <span>
         <BaseLink to="https://www.josh.ee">made by josh</BaseLink>
       </span>
-      <span>
-        <BaseLink to="https://www.buymeacoffee.com/josh.ee">buy me a coffee ☕</BaseLink>
-      </span>
     </p>
   </footer>
 </template>
 
 <script>
 export default {
-  name: 'PageFooter'
+  name: 'PageFooter',
 }
 </script>
