@@ -55,9 +55,9 @@
             {{ domain }} is taken
           </p>
 
-          <BaseLink :to="`https://who.is/whois/${domain}`" class="mb6"
-            >see whois</BaseLink
-          >
+          <BaseLink :to="`https://${domain}`">visit site</BaseLink>
+          -
+          <BaseLink :to="`https://who.is/whois/${domain}`">whois</BaseLink>
         </template>
 
         <!-- Domain is unknown -->
