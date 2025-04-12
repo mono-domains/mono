@@ -109,6 +109,12 @@ export default defineNuxtConfig({
     logLevel: 'silent',
   },
 
+  nitro: {
+    prerender: {
+      failOnError: false,
+    },
+  },
+
   hooks: {
     'nitro:config': async nitroConfig => {
       if (nitroConfig.dev) {
