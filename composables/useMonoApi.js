@@ -3,13 +3,13 @@ const requestCache = {
   whois: {},
   extension: {},
   allExtensions: null,
-  homepageStats: null
+  homepageStats: null,
 }
 
 export const useMonoApi = () => {
   const runtimeConfig = useRuntimeConfig()
 
-  const makeApiCall = async (path) => {
+  const makeApiCall = async path => {
     const apiRequest = await fetch(runtimeConfig.public.apiBase + path)
 
     if (!apiRequest.ok) {
@@ -19,7 +19,7 @@ export const useMonoApi = () => {
     return apiRequest
   }
 
-  const getSearchResultsFromApi = async (search) => {
+  const getSearchResultsFromApi = async search => {
     // Check the cache first
     if (requestCache.search[search]) {
       return requestCache.search[search]
@@ -34,7 +34,7 @@ export const useMonoApi = () => {
     return apiJson
   }
 
-  const getWhoisResultFromApi = async (domain) => {
+  const getWhoisResultFromApi = async domain => {
     // Check the cache first
     if (requestCache.whois[domain]) {
       return requestCache.whois[domain]
@@ -49,7 +49,7 @@ export const useMonoApi = () => {
     return apiJson
   }
 
-  const getExtensionPricingResultFromApi = async (extension) => {
+  const getExtensionPricingResultFromApi = async extension => {
     // Determine the extension category
     let extensionCategory = extension.substring(1, 2)
 
@@ -69,7 +69,7 @@ export const useMonoApi = () => {
       return requestCache.extension[extension]
     }
 
-    const apiRequest = await makeApiCall(`/extension/${extension}`)
+    const apiRequest = await makeApiCall(`/extension/${extension.substring(1)}`)
     const apiJson = await apiRequest.json()
 
     // Cache the request
@@ -109,6 +109,6 @@ export const useMonoApi = () => {
     getWhoisResultFromApi,
     getExtensionPricingResultFromApi,
     getAllExtensionsFromApi,
-    getHomepageStatsFromApi
+    getHomepageStatsFromApi,
   }
 }

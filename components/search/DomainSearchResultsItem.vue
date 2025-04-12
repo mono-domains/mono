@@ -3,20 +3,28 @@
     <button
       class="w-full text-left flex transition-opacity duration-300 text-xl sm:text-2xl tracking-wide"
       :class="{
-        'opacity-50': isDomainAvailable === false
+        'opacity-50': isDomainAvailable === false,
       }"
-      @click="toggleIsExpanded">
+      @click="toggleIsExpanded"
+    >
       <h2 class="flex-1 font-semibold tracking-wide">
-        <span v-if="result.subdomains" class="text-neutral-400">{{ result.subdomains }}</span>
+        <span v-if="result.subdomains" class="text-neutral-400">{{
+          result.subdomains
+        }}</span>
         <span class="break-all">{{ result.domain }}</span>
-        <span :class="isExtension ? '' : 'text-neutral-700'">{{ result.extension.extension }}</span>
+        <span :class="isExtension ? '' : 'text-neutral-700'">{{
+          result.extension.extension
+        }}</span>
       </h2>
-      
-      <span v-if="!isExtension" :class="{
-        'text-amber-500': domainAvailability === '???',
-        'text-red-500': domainAvailability === 'no',
-        'text-green-500': domainAvailability === 'yes'
-      }">
+
+      <span
+        v-if="!isExtension"
+        :class="{
+          'text-amber-500': domainAvailability === '???',
+          'text-red-500': domainAvailability === 'no',
+          'text-green-500': domainAvailability === 'yes',
+        }"
+      >
         {{ domainAvailability }}
       </span>
     </button>
@@ -24,23 +32,32 @@
     <div v-if="isExpanded" class="mt-6 mb-8 sm:pl-4" v-auto-animate>
       <div class="mb-6 sm:mb-8">
         <template v-if="isExtension">
-          <p class="text-4xl sm:text-5xl font-semibold mb-3">{{ result.extension.extension }}</p>
-          <p class="text-l sm:text-xl tracking-wide">{{ result.extension.extension }} is a domain extension</p>
+          <p class="text-4xl sm:text-5xl font-semibold mb-3">
+            {{ result.extension.extension }}
+          </p>
+          <p class="text-l sm:text-xl tracking-wide">
+            {{ result.extension.extension }} is a domain extension
+          </p>
         </template>
 
         <!-- Checking Whois -->
         <template v-else-if="whoisSearchStatus === 'pending'">
           <p class="text-4xl sm:text-5xl font-semibold mb-3">one sec.. ⚙️</p>
-          <p class="text-l sm:text-xl tracking-wide">we're checking this domain's availability</p>
+          <p class="text-l sm:text-xl tracking-wide">
+            we're checking this domain's availability
+          </p>
         </template>
 
         <!-- Domain is taken -->
         <template v-else-if="isDomainAvailable === false">
           <p class="text-4xl sm:text-5xl font-semibold mb-3">sorry! 😔</p>
-          <p class="text-l sm:text-xl tracking-wide mb-6 sm:mb-8">{{ domain }} is taken</p>
-          <pre
-            class="max-w-3xl max-h-60 mb-8 rounded bg-neutral-50 px-5 sm:px-8 py-4 sm:py-6 text-sm shadow-md shadow-neutral-200 overflow-auto whitespace-pre-line"
-          >{{ whoisInfo }}</pre>
+          <p class="text-l sm:text-xl tracking-wide mb-3 sm:mb-8">
+            {{ domain }} is taken
+          </p>
+
+          <BaseLink :to="`https://who.is/whois/${domain}`" class="mb6"
+            >see whois</BaseLink
+          >
         </template>
 
         <!-- Domain is unknown -->
@@ -48,13 +65,25 @@
           <p class="text-4xl sm:text-5xl font-semibold mb-3">hmm.. 🤔</p>
           <p class="text-l sm:text-xl tracking-wide">
             {{ domain }} might be available
-            <BaseTooltip :ariaId="maybeAvailableAriaId" class="hidden sm:inline-block ml-0.5 translate-y-px">
+            <BaseTooltip
+              :ariaId="maybeAvailableAriaId"
+              class="hidden sm:inline-block ml-0.5 translate-y-px"
+            >
               <template #label>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-4 h-4">
-                  <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 18.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5zm1.961-5.928c-.904.975-.947 1.514-.935 2.178h-2.005c-.007-1.475.02-2.125 1.431-3.468.573-.544 1.025-.975.962-1.821-.058-.805-.73-1.226-1.365-1.226-.709 0-1.538.527-1.538 2.013h-2.01c0-2.4 1.409-3.95 3.59-3.95 1.036 0 1.942.339 2.55.955.57.578.865 1.372.854 2.298-.016 1.383-.857 2.291-1.534 3.021z"/>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  class="w-4 h-4"
+                >
+                  <path
+                    d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 18.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5zm1.961-5.928c-.904.975-.947 1.514-.935 2.178h-2.005c-.007-1.475.02-2.125 1.431-3.468.573-.544 1.025-.975.962-1.821-.058-.805-.73-1.226-1.365-1.226-.709 0-1.538.527-1.538 2.013h-2.01c0-2.4 1.409-3.95 3.59-3.95 1.036 0 1.942.339 2.55.955.57.578.865 1.372.854 2.298-.016 1.383-.857 2.291-1.534 3.021z"
+                  />
                 </svg>
               </template>
-              <template #tooltip>we couldn't determine whether {{ domain }} is available at this time, please check with the registrars below</template>
+              <template #tooltip
+                >we couldn't determine whether {{ domain }} is available at this
+                time, please check with the registrars below</template
+              >
             </BaseTooltip>
           </p>
         </template>
@@ -62,11 +91,16 @@
         <!-- Domain is available -->
         <template v-else>
           <p class="text-4xl sm:text-5xl font-semibold mb-3">yay! 🎉</p>
-          <p class="text-l sm:text-xl tracking-wide">{{ domain }} is available!</p>
+          <p class="text-l sm:text-xl tracking-wide">
+            {{ domain }} is available!
+          </p>
         </template>
       </div>
 
-      <RegistrarPricing v-if="isDomainAvailable !== false" :registrars="result.extension.registrars" />
+      <RegistrarPricing
+        v-if="isDomainAvailable !== false"
+        :registrars="result.extension.registrars"
+      />
     </div>
   </li>
 </template>
@@ -84,8 +118,8 @@ export default {
   props: {
     result: {
       type: Object,
-      default: null
-    }
+      default: null,
+    },
   },
   data() {
     return {
@@ -93,7 +127,7 @@ export default {
       whoisSearchStatus: 'pending',
       isDomainAvailable: null,
       whoisInfo: null,
-      isWhoisVisible: false
+      isWhoisVisible: false,
     }
   },
   computed: {
@@ -118,7 +152,7 @@ export default {
     },
     isExtension() {
       return this.result.domain === ''
-    }
+    },
   },
   mounted() {
     this.setDomainAvailabilityInfo()
@@ -133,7 +167,8 @@ export default {
       const punycodedDomain = punycode.toASCII(this.domain)
 
       try {
-        const { success, isDomainAvailable, whoisInfo, error } = await this.getWhoisResultFromApi(punycodedDomain)
+        const { success, isDomainAvailable, error } =
+          await this.getWhoisResultFromApi(punycodedDomain)
 
         if (!success) {
           this.whoisSearchStatus = 'error'
@@ -142,8 +177,7 @@ export default {
         }
 
         this.whoisSearchStatus = 'success'
-        this.isDomainAvailable = isDomainAvailable,
-        this.whoisInfo = whoisInfo.trim()
+        this.isDomainAvailable = isDomainAvailable
       } catch (e) {
         this.whoisSearchStatus = 'error'
 
@@ -155,7 +189,7 @@ export default {
     },
     toggleIsWhoisVisible() {
       this.isWhoisVisible = !this.isWhoisVisible
-    }
-  }
+    },
+  },
 }
 </script>

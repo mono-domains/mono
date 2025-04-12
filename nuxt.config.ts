@@ -1,7 +1,10 @@
 import fetch from 'node-fetch'
 
-// const apiBase = process.env.NODE_ENV === 'development' ? 'http://localhost' : 'https://api.mono.domains'
-const apiBase = 'https://api.mono.domains'
+const apiBase =
+  process.env.NODE_ENV === 'development'
+    ? 'http://localhost'
+    : 'https://api.mono.domains'
+// const apiBase = 'https://api.mono.domains'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -9,43 +12,80 @@ export default defineNuxtConfig({
     head: {
       title: 'mono domains - awesome domains for the cheapest prices',
       htmlAttrs: {
-        lang: 'en'
+        lang: 'en',
       },
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { hid: 'description', name: 'description', content: 'mono domains is a domain search engine that helps you find the cheapest domain names. with mono, you can find awesome domain names for the best prices!' },
+        {
+          hid: 'description',
+          name: 'description',
+          content:
+            'mono domains is a domain search engine that helps you find the cheapest domain names. with mono, you can find awesome domain names for the best prices!',
+        },
         { name: 'format-detection', content: 'telephone=no' },
         { hid: 'canonical', rel: 'canonical', href: 'https://mono.domains' },
-        { hid: 'twitter:site', name: 'twitter:site', content: 'https://mono.domains' },
-        { hid: 'twitter:image', name: 'twitter:image', content: 'https://mono.domains/android-chrome-512x512.png' },
+        {
+          hid: 'twitter:site',
+          name: 'twitter:site',
+          content: 'https://mono.domains',
+        },
+        {
+          hid: 'twitter:image',
+          name: 'twitter:image',
+          content: 'https://mono.domains/android-chrome-512x512.png',
+        },
         { property: 'og:type', content: 'website' },
-        { hid: 'og:title', property: 'og:title', content: 'mono domains - awesome domains for the cheapest prices' },
-        { hid: 'og:description', property: 'og:description', content: 'mono domains is a domain search engine that helps you find the cheapest domain names. with mono, you can find awesome domain names for the best prices!' },
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content: 'mono domains - awesome domains for the cheapest prices',
+        },
+        {
+          hid: 'og:description',
+          property: 'og:description',
+          content:
+            'mono domains is a domain search engine that helps you find the cheapest domain names. with mono, you can find awesome domain names for the best prices!',
+        },
         { hid: 'og:url', property: 'og:url', content: 'https://mono.domains' },
         { property: 'og:site_name', content: 'mono domains' },
-        { hid: 'og:image', property: 'og:image', content: 'https://mono.domains/android-chrome-512x512.png' }
+        {
+          hid: 'og:image',
+          property: 'og:image',
+          content: 'https://mono.domains/android-chrome-512x512.png',
+        },
       ],
       link: [
         { rel: 'stylesheet', href: '/fonts/fonts.css' },
-        { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
-        { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png' },
-        { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16x16.png' },
-        { rel: 'manifest', href:'/site.webmanifest' }
-      ]
-    }
+        {
+          rel: 'apple-touch-icon',
+          sizes: '180x180',
+          href: '/apple-touch-icon.png',
+        },
+        {
+          rel: 'icon',
+          type: 'image/png',
+          sizes: '32x32',
+          href: '/favicon-32x32.png',
+        },
+        {
+          rel: 'icon',
+          type: 'image/png',
+          sizes: '16x16',
+          href: '/favicon-16x16.png',
+        },
+        { rel: 'manifest', href: '/site.webmanifest' },
+      ],
+    },
   },
 
-  modules: [
-    '@nuxtjs/tailwindcss',
-    'nuxt-simple-sitemap'
-  ],
+  modules: ['@nuxtjs/tailwindcss', 'nuxt-simple-sitemap'],
 
   components: [
     {
       path: '~/components',
-      pathPrefix: false
-    }
+      pathPrefix: false,
+    },
   ],
 
   ssr: true,
@@ -54,23 +94,23 @@ export default defineNuxtConfig({
     siteUrl: 'https://mono.domains',
     trailingSlash: true,
   },
-  
+
   runtimeConfig: {
     public: {
-      apiBase
-    }
+      apiBase,
+    },
   },
 
   build: {
-    transpile: ['@formkit/auto-animate']
+    transpile: ['@formkit/auto-animate'],
   },
 
   vite: {
-    logLevel: 'silent'
+    logLevel: 'silent',
   },
 
   hooks: {
-    'nitro:config': async (nitroConfig) => {
+    'nitro:config': async nitroConfig => {
       if (nitroConfig.dev) {
         return
       }
@@ -82,13 +122,15 @@ export default defineNuxtConfig({
       nitroConfig.prerender.routes.push(`/extensions`)
 
       // Then add them to the prerender routes list
-      Object.values(apiJson.results).forEach((extensionList) => {
-        Object.values(extensionList).forEach((extension) => {
+      Object.values(apiJson.results).forEach(extensionList => {
+        Object.values(extensionList).forEach(extension => {
           // Files/directories starting with . are ignored in Netlify deploys,
           // so exclude the . from the generated route
-          nitroConfig.prerender.routes.push(`/extensions/${extension.extension.substring(1)}`)
+          nitroConfig.prerender.routes.push(
+            `/extensions/${extension.extension.substring(1)}`
+          )
         })
       })
-    }
-  }
+    },
+  },
 })
