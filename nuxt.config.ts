@@ -79,7 +79,7 @@ export default defineNuxtConfig({
     },
   },
 
-  modules: ['@nuxtjs/tailwindcss', 'nuxt-simple-sitemap'],
+  modules: ['@nuxtjs/tailwindcss', '@nuxtjs/sitemap'],
 
   components: [
     {
@@ -133,4 +133,6 @@ export default defineNuxtConfig({
       })
     },
   },
+
+  compatibilityDate: '2025-04-12',
 })

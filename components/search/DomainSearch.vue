@@ -2,21 +2,27 @@
   <DomainSearchInput ref="searchInput" @onInput="onSearchInput" />
 
   <div v-auto-animate>
-    <p v-if="exampleSearch && searchResults.length === 0" class="mt-6 sm:mt-8 text-xl sm:text-2xl transition-opacity duration-300">
-      {{ examplePrefix }} try
-      '<a
+    <p
+      v-if="exampleSearch && searchResults.length === 0"
+      class="mt-6 sm:mt-8 text-xl sm:text-2xl transition-opacity duration-300"
+    >
+      {{ examplePrefix }} try '<a
         href="#"
         class="text-sky-700 decoration-1 underline underline-offset-4 decoration-transparent hover:decoration-current transition-colors duration-300"
         @click.prevent="doSearch(exampleSearch)"
-      >{{ exampleSearch }}</a>'
+        >{{ exampleSearch }}</a
+      >'
     </p>
 
-    <DomainSearchResults v-if="searchResults.length > 0" :results="searchResults" />
+    <DomainSearchResults
+      v-if="searchResults.length > 0"
+      :results="searchResults"
+    />
   </div>
 </template>
 
 <script>
-import punycode from 'punycode'
+import punycode from 'punycode/'
 import { debounce } from '~/mixins/debounce'
 
 export default {
@@ -32,7 +38,7 @@ export default {
       searchTerm: '',
       searchResults: [],
       examplePrefix: '',
-      exampleSearch: ''
+      exampleSearch: '',
     }
   },
   computed: {
@@ -42,7 +48,7 @@ export default {
       searchTerm = searchTerm.replace(/^[a-z]*(?:\:\/\/)/, '')
 
       return searchTerm
-    }
+    },
   },
   mounted() {
     setTimeout(this.setExampleSearch, 1000)
@@ -73,11 +79,11 @@ export default {
         const searchResponse = await this.getSearchResultsFromApi(searchTerm)
         const searchResults = searchResponse.results
 
-        const formattedSearchResults = searchResults.map((result) => {
+        const formattedSearchResults = searchResults.map(result => {
           return {
             extension: this.getDecodedExtension(result.extension),
             domain: punycode.toUnicode(result.domain),
-            subdomains: punycode.toUnicode(result.subdomains)
+            subdomains: punycode.toUnicode(result.subdomains),
           }
         })
 
@@ -93,7 +99,9 @@ export default {
       const secondWords = ['cars', 'domains', 'website', 'gifts', 'holiday']
 
       this.examplePrefix = this.getRandomItem(prefixes)
-      this.exampleSearch = `${this.getRandomItem(firstWords)} ${this.getRandomItem(secondWords)}`
+      this.exampleSearch = `${this.getRandomItem(
+        firstWords
+      )} ${this.getRandomItem(secondWords)}`
     },
     getRandomItem(array) {
       return array[Math.floor(Math.random() * array.length)]
@@ -109,7 +117,7 @@ export default {
       extension.extension = punycode.toUnicode(extension.extension)
 
       return extension
-    }
-  }
+    },
+  },
 }
 </script>

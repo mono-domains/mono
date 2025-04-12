@@ -106,7 +106,7 @@
 </template>
 
 <script>
-import punycode from 'punycode'
+import punycode from 'punycode/'
 
 export default {
   name: 'DomainSearchResultsItem',

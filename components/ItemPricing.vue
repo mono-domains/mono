@@ -1,44 +1,54 @@
 <template>
   <li
     class="relative flex items-center mr-3 mb-3 rounded rounded bg-neutral-50 shadow-md shadow-neutral-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 leading-normal text-center"
-    :class="sizeClasses">
+    :class="sizeClasses"
+  >
     <NuxtLink
       v-if="isExtension"
       :to="`/extensions/${pricing.name.substring(1)}/`"
       class="block w-full"
       :class="isLarge ? 'py-1.5' : 'py-1'"
-      :noPrefetch="prefetch === false ? true : null">
+      :noPrefetch="prefetch === false ? true : null"
+    >
       <p class="font-semibold tracking-wide">{{ decodedName }}</p>
-      <p class="tracking-wide">from ${{ formatNumber(pricing.registerPrice) }}</p>
+      <p class="tracking-wide">
+        from ${{ formatNumber(pricing.registerPrice) }}
+      </p>
     </NuxtLink>
 
-    <a v-else :href="pricing.registerUrl" class="block w-full" :class="isLarge ? 'py-1.5' : 'py-1'" target="_blank" rel="noopener">
+    <a
+      v-else
+      :href="pricing.registerUrl"
+      class="block w-full"
+      :class="isLarge ? 'py-1.5' : 'py-1'"
+      target="_blank"
+      rel="noopener"
+    >
       <p class="font-semibold tracking-wide">{{ pricing.name }}</p>
       <p class="tracking-wide">${{ formatNumber(pricing.registerPrice) }}</p>
     </a>
 
     <div
       v-if="pricing.isOnSale"
-      class="absolute top-0 right-0 translate-x-1/3 -translate-y-1/3">
+      class="absolute top-0 right-0 translate-x-1/3 -translate-y-1/3"
+    >
       <BaseTooltip :ariaId="saleTooltipAriaId" class="translate-y-px">
         <template #label>
           <span
             class="flex justify-center items-center leading-3 bg-red-500 font-semibold text-white rounded-full -rotate-6"
-            :class="saleRibbonSizeClasses">
+            :class="saleRibbonSizeClasses"
+          >
             %
           </span>
         </template>
-        <template #tooltip>
-          this extension is on sale!
-        </template>
+        <template #tooltip> this extension is on sale! </template>
       </BaseTooltip>
     </div>
   </li>
 </template>
 
 <script>
-import punycode from 'punycode'
-
+import punycode from 'punycode/'
 import { helpers } from '../mixins/helpers'
 
 export default {
@@ -47,20 +57,20 @@ export default {
   props: {
     pricing: {
       type: Object,
-      default: null
+      default: null,
     },
     isExtension: {
       type: Boolean,
-      default: false
+      default: false,
     },
     isLarge: {
       type: Boolean,
-      default: false
+      default: false,
     },
     prefetch: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
   computed: {
     sizeClasses() {
@@ -85,7 +95,7 @@ export default {
       const cleanedPricingName = pricingName.replace(/[^a-z0-9]/g, '')
 
       return `${cleanedPricingName}IsOnSale`
-    }
-  }
+    },
+  },
 }
 </script>
