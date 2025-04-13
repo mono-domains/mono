@@ -58,6 +58,11 @@
           <BaseLink :to="`https://${domain}`">visit site</BaseLink>
           -
           <BaseLink :to="`https://who.is/whois/${domain}`">whois</BaseLink>
+          -
+          <BaseLink
+            :to="`/extensions/${result.extension.extension.substring(1)}`"
+            >{{ result.extension.extension }} pricing</BaseLink
+          >
         </template>
 
         <!-- Domain is unknown -->

@@ -1,49 +1,90 @@
 <template>
   <li
-    class="relative flex items-center mr-3 mb-3 rounded rounded bg-neutral-50 shadow-md shadow-neutral-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 leading-normal text-center"
+    class="relative mr-3 mb-3 rounded bg-neutral-50 shadow-md shadow-neutral-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 leading-normal text-center"
     :class="sizeClasses"
   >
-    <NuxtLink
-      v-if="isExtension"
-      :to="`/extensions/${pricing.name.substring(1)}/`"
-      class="block w-full"
-      :class="isLarge ? 'py-1.5' : 'py-1'"
-      :noPrefetch="prefetch === false ? true : null"
-    >
-      <p class="font-semibold tracking-wide">{{ decodedName }}</p>
-      <p class="tracking-wide">
-        from ${{ formatNumber(pricing.registerPrice) }}
-      </p>
-    </NuxtLink>
+    <BaseTooltip class="flex justify-center w-full h-full">
+      <template #label>
+        <NuxtLink
+          v-if="isExtension"
+          :to="`/extensions/${pricing.extension.substring(1)}/`"
+          class="block w-full"
+          :class="isLarge ? 'py-1.5' : 'py-1'"
+          :noPrefetch="prefetch === false ? true : null"
+        >
+          <p
+            class="font-semibold tracking-wide"
+            :dir="getTextDirection(decodedExtension)"
+          >
+            {{ decodedExtension }}
+          </p>
+          <p class="tracking-wide">
+            from ${{ formatNumber(pricing.registerPrice) }}
+          </p>
+        </NuxtLink>
 
-    <a
-      v-else
-      :href="pricing.registerUrl"
-      class="block w-full"
-      :class="isLarge ? 'py-1.5' : 'py-1'"
-      target="_blank"
-      rel="noopener"
-    >
-      <p class="font-semibold tracking-wide">{{ pricing.name }}</p>
-      <p class="tracking-wide">${{ formatNumber(pricing.registerPrice) }}</p>
-    </a>
+        <a
+          v-else
+          :href="pricing.registerUrl"
+          class="block w-full"
+          :class="isLarge ? 'py-1.5' : 'py-1'"
+          target="_blank"
+          rel="noopener"
+        >
+          <p class="font-semibold tracking-wide">{{ pricing.registrar }}</p>
+          <p class="tracking-wide">
+            ${{ formatNumber(pricing.registerPrice) }}
+          </p>
+        </a>
 
-    <div
-      v-if="pricing.isOnSale"
-      class="absolute top-0 right-0 translate-x-1/3 -translate-y-1/3"
-    >
-      <BaseTooltip :ariaId="saleTooltipAriaId" class="translate-y-px">
-        <template #label>
+        <div
+          v-if="pricing.isOnSale"
+          class="absolute top-0 right-0 translate-x-1/3 -translate-y-1/3"
+        >
           <span
-            class="flex justify-center items-center leading-3 bg-red-500 font-semibold text-white rounded-full -rotate-6"
+            class="flex justify-center items-center leading-3 bg-red-500 font-semibold text-white rounded-full -rotate-6 cursor-default"
             :class="saleRibbonSizeClasses"
           >
             %
           </span>
-        </template>
-        <template #tooltip> this extension is on sale! </template>
-      </BaseTooltip>
-    </div>
+        </div>
+      </template>
+
+      <template #tooltip>
+        <div class="text-left font-light">
+          <p
+            class="mb-2 font-semibold"
+            :dir="getTextDirection(decodedExtension)"
+          >
+            <span>{{ decodedExtension }}</span> - {{ pricing.registrar }}
+          </p>
+          <table>
+            <tr>
+              <td>
+                <p class="mr-4">registration price:</p>
+              </td>
+              <td>
+                <p class="font-semibold">
+                  ${{ formatNumber(pricing.registerPrice) }}
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p class="mr-4">renewal price:</p>
+              </td>
+              <td>
+                <p class="font-semibold">
+                  ${{ formatNumber(pricing.renewalPrice) }}
+                </p>
+              </td>
+            </tr>
+          </table>
+
+          <p v-if="pricing.isOnSale" class="mt-2">this extension is on sale!</p>
+        </div>
+      </template>
+    </BaseTooltip>
   </li>
 </template>
 
@@ -87,8 +128,8 @@ export default {
 
       return 'w-5.25 h-5.25 text-xs'
     },
-    decodedName() {
-      return punycode.toUnicode(this.pricing.name)
+    decodedExtension() {
+      return punycode.toUnicode(this.pricing.extension)
     },
     saleTooltipAriaId() {
       const pricingName = this.pricing.name.toLowerCase()

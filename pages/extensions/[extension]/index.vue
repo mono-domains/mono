@@ -55,11 +55,13 @@ useHead({
 
   <div class="w-full max-w-5xl mx-auto px-4 sm:px-6 py-24 sm:py-32 md:py-44">
     <h1 class="text-6xl sm:text-8xl font-bold leading-none -ml-0.5 mb-4">
-      {{ encodedExtension }}
+      <span :dir="getTextDirection(encodedExtension)">{{
+        encodedExtension
+      }}</span>
     </h1>
     <p class="text-l sm:text-xl leading-relaxed mb-10 sm:mb-12">
       the
-      <span class="font-semibold"
+      <span class="font-semibold" :dir="getTextDirection(encodedExtension)"
         >{{ encodedExtension }}
         {{ encodedExtension !== extension ? `(${extension})` : '' }}</span
       >

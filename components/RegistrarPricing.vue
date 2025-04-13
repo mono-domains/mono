@@ -2,42 +2,52 @@
   <ul class="flex flex-wrap -mb-3">
     <component
       :is="extension ? 'h2' : 'h3'"
-      class="w-full font-semibold tracking-wide text-xl sm:text-2xl mb-4">
-      cheapest {{ extension }} registration
+      class="w-full font-semibold tracking-wide text-xl sm:text-2xl mb-4"
+    >
+      cheapest
+      <span :dir="getTextDirection(extension)">{{ extension }}</span>
+      registration
     </component>
-    <ItemPricing
-      :isLarge="true"
-      :pricing="cheapestRegistrar" />
+    <ItemPricing :isLarge="true" :pricing="cheapestRegistrar" />
 
     <template v-if="otherRegistrars.length">
-      <h3 class="w-full font-semibold tracking-wide text-l sm:text-xl mt-5 mb-4">other registrars</h3>
+      <h3
+        class="w-full font-semibold tracking-wide text-l sm:text-xl mt-5 mb-4"
+      >
+        other registrars
+      </h3>
       <ItemPricing
-        v-for="(registrar, key) in otherRegistrars" :key="registrar + key"
-        :pricing="registrar" />
+        v-for="(registrar, key) in otherRegistrars"
+        :key="registrar + key"
+        :pricing="registrar"
+      />
     </template>
   </ul>
 </template>
 
 <script>
+import { helpers } from '../mixins/helpers'
+
 export default {
   name: 'RegistrarPricing',
   props: {
     extension: {
       type: String,
-      default: ''
+      default: '',
     },
     registrars: {
       type: Array,
-      default: null
-    }
+      default: null,
+    },
   },
+  mixins: [helpers],
   computed: {
     cheapestRegistrar() {
       return this.registrars[0]
     },
     otherRegistrars() {
       return this.registrars.slice(1)
-    }
-  }
+    },
+  },
 }
 </script>
