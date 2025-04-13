@@ -3,7 +3,10 @@
     class="relative mr-3 mb-3 rounded bg-neutral-50 shadow-md shadow-neutral-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 leading-normal text-center"
     :class="sizeClasses"
   >
-    <BaseTooltip class="flex justify-center w-full h-full">
+    <BaseTooltip
+      :ariaId="tooltipAriaId"
+      class="flex justify-center w-full h-full"
+    >
       <template #label>
         <NuxtLink
           v-if="isExtension"
@@ -131,11 +134,13 @@ export default {
     decodedExtension() {
       return punycode.toUnicode(this.pricing.extension)
     },
-    saleTooltipAriaId() {
-      const pricingName = this.pricing.name.toLowerCase()
+    tooltipAriaId() {
+      const pricingName = this.isExtension
+        ? this.pricing.extension.toLowerCase()
+        : this.pricing.registrar.toLowerCase()
       const cleanedPricingName = pricingName.replace(/[^a-z0-9]/g, '')
 
-      return `${cleanedPricingName}IsOnSale`
+      return cleanedPricingName + this.getRandomId()
     },
   },
 }
