@@ -56,7 +56,6 @@ export default defineNuxtConfig({
         },
       ],
       link: [
-        { rel: 'stylesheet', href: '/fonts/fonts.css' },
         {
           rel: 'apple-touch-icon',
           sizes: '180x180',
@@ -75,6 +74,50 @@ export default defineNuxtConfig({
           href: '/favicon-16x16.png',
         },
         { rel: 'manifest', href: '/site.webmanifest' },
+      ],
+      style: [
+        {
+          innerHTML: `
+            @font-face {
+              font-family: 'Geomanist';
+              src: url('/fonts/geomanist-regular-webfont.eot');
+              src: url('/fonts/geomanist-regular-webfont.eot?#iefix') format('embedded-opentype'),
+                  url('/fonts/geomanist-regular-webfont.woff2') format('woff2'),
+                  url('/fonts/geomanist-regular-webfont.woff') format('woff'),
+                  url('/fonts/geomanist-regular-webfont.ttf') format('truetype'),
+                  url('/fonts/geomanist-regular-webfont.svg#geomanistregular') format('svg');
+              font-weight: 400;
+              font-style: normal;
+              font-display: swap;
+            }
+
+            @font-face {
+              font-family: 'Geomanist';
+              src: url('/fonts/geomanist-book-webfont.eot');
+              src: url('/fonts/geomanist-book-webfont.eot?#iefix') format('embedded-opentype'),
+                  url('/fonts/geomanist-book-webfont.woff2') format('woff2'),
+                  url('/fonts/geomanist-book-webfont.woff') format('woff'),
+                  url('/fonts/geomanist-book-webfont.ttf') format('truetype'),
+                  url('/fonts/geomanist-book-webfont.svg#geomanistregular') format('svg');
+              font-weight: 600;
+              font-style: normal;
+              font-display: swap;
+            }
+
+            @font-face {
+              font-family: 'Geomanist';
+              src: url('/fonts/geomanist-bold-webfont.eot');
+              src: url('/fonts/geomanist-bold-webfont.eot?#iefix') format('embedded-opentype'),
+                  url('/fonts/geomanist-bold-webfont.woff2') format('woff2'),
+                  url('/fonts/geomanist-bold-webfont.woff') format('woff'),
+                  url('/fonts/geomanist-bold-webfont.ttf') format('truetype'),
+                  url('/fonts/geomanist-bold-webfont.svg#geomanistregular') format('svg');
+              font-weight: 700;
+              font-style: normal;
+              font-display: swap;
+            }
+          `,
+        },
       ],
     },
   },
